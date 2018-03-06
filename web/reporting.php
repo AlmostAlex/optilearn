@@ -8,9 +8,10 @@ require ('db.php')
 <?php
 if (isset($_POST['report'])) {
     $semester = $_POST['semester']; 
-    $modul_aktuell = $_POST['modulbezeichnung'];
+    $modul_id = $_POST['modul_id'];
+
     $report = new reporting_controller();
-    $report->ReportBasis($semester,$modul_aktuell);  
+    $report->ReportBasis($semester,$modul_id);  
 }
 
 ?>  

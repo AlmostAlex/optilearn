@@ -17,7 +17,7 @@ include "header.php";
                 <li class='Thema_uebersicht'><a href='/mt_verwaltung.php'>Übersicht &<br>Verwaltung<span></span></a></li>
                 <li class='thema_hochladen'><a href='/blubb'>Archivierung<br>von Modulen<span></span></a></li>
                 <li class='inf_verwalten'><a href='/modul_eintragen.php'>Modul <br>eintragen<span></span></a></li>
-                <li class='report_erstellen'><a href='/reporting.php'>Report <br>erstellen<span></span></a></li>
+                <li class='report_erstellen'><a href='/report_wahl.php'>Report <br>erstellen<span></span></a></li>
         </ul>
 </div>
 
