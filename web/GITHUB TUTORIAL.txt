@@ -1,0 +1,33 @@
+Tutorial für GITHUB DESKTOP
+
+ICH FANGE AN NEUEN CODE FÜR DAS PROJEKT ZU SCHREIBEN: WAS TUE ICH ALS ERSTES?
+- Projekt aktualisieren:
+    - Fetch Origin
+    - wenn auf dem button ne zahl angezeigt wird, drauf drücken
+
+ICH HABE ETWAS GEÄNDERT UND WILL ES TEILEN / ICH BIN FERTIG MIT DEM PROGRAMMIEREN FÜR HEUTE WAS TUE ICH?
+- Dateien uploaden:
+    - auf der linken Seite die Changes anschauen und gegebenenfall einige Änderungen verwerden
+    - Commit to Master
+    - Push to Origin
+
+
+
+
+
+QUIZ zum Verständnis:
+
+ICH FANGE AN NEUEN CODE FÜR DAS PROJEKT ZU SCHREIBEN: WAS TUE ICH ALS ERSTES?
+    a) Nichts
+    b) Weiß ich selbst nicht xD
+    c) Projekt aktualisieren
+
+ICH BIN FERTIG MIT DEM PROGRAMMIEREN FÜR HEUTE WAS TUE ICH?
+    a) Fap Fap
+    b) Dateien uploaden
+    c) Projekt löschen
+
+ES GIBT TROTZ ALLEM EIN PROBLEM UND ICH KOMME NICHT KLAR MIT GITHUB: WAS TUE ICH?
+    a) Weinen
+    b) Duc fragen
+    c) Github schließen und nie wieder verwenden

@@ -1,0 +1,139 @@
+.bewerbung_verwaltung table{
+    font-size: 12.5px;
+    width: 100%;
+    margin: 1em 0;
+    border-top: 4px solid #3979b5;
+    border-bottom: 1px solid rgba(34,36,38,.15);
+    border-left: 1px solid rgba(34,36,38,.15);
+    border-right: 1px solid rgba(34,36,38,.15);
+    box-shadow: none;
+    border-radius: .28571429rem;
+    text-align: left;
+    color: rgba(0,0,0,.87);
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.bewerbung_verwaltung table tr{
+    font-size: 12.5px;
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+    border-left: 1px solid rgba(34,36,38,.1);
+}
+
+.bewerbung_verwaltung table tr th{
+    font-size: 12.5px;
+    cursor: auto;
+    background: #F9FAFB;
+    text-align: inherit;
+    color: rgba(0,0,0,.87);
+    padding: .82857143em .78571429em;
+    vertical-align: inherit;
+    font-style: none;
+    font-weight: 700;
+    text-transform: none;
+    border-left: 1px solid rgba(34,36,38,.1);
+    border-bottom: 1px solid rgba(34,36,38,.1);
+
+}
+
+.bewerbung_verwaltung table tr td{
+    border-left: 1px solid rgba(34,36,38,.1);
+    border-bottom: 1px solid rgba(34,36,38,.1);
+    padding: .58571429em;
+    text-align: inherit;      
+} 
+
+.vergeben{
+    border: 1px solid rgba(34,36,38,.6);
+    padding: .58571429em;    
+} 
+
+.bewerbung_verwaltung table tr:nth-child(2n-2){
+    background-color: rgba(34,36,38,.025);
+    font-size: 12.5px;
+    font-family: 'Open Sans Condensed', sans-serif;  color: #333;
+} 
+
+.bewerbung_verwaltung table tr:nth-child(2n-1){
+    background-color: rgba(34,36,38,.01);
+    font-family: 'Open Sans Condensed', sans-serif;  color: #333;
+}
+
+
+.bewerbung_verwaltung table tr:hover{
+    background-color: rgba(34,36,38,.04);
+}
+
+.bewerbung_verwaltung table th:hover{
+    background-color: rgba(34,36,38,.005);
+}
+
+.bewerbung_verwaltung table tr td a annahme {
+    font-size: 11px;
+    color: #ffffff;
+    background-color: #00AA00;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.annahme {
+    font-size: 11px;
+    color: #ffffff;
+    background-color: #00AA00;
+    padding: 5px;
+    border-radius: 5px;
+    line-height: none;
+    height: 30px;
+}
+.ablehnung {
+    font-size: 11px;
+    color: #ffffff;
+    background-color: #FF0000;
+    padding: 4px;
+    border-radius: 5px;
+    line-height: none;
+    height: 30px;
+} 
+
+.bewerbung_verwaltung table tr td a ablehnung {
+    font-size: 11px;
+    color: #ffffff;
+    background-color: #FF0000;
+    padding: 5px;
+    border-radius: 5px;
+} 
+
+.status_annahme{
+    font-size: 11px;
+    color: green;
+    padding: 3px;
+    background-color:#e7e8ea;
+    border: 1px solid #c8d8bc;
+    border-radius: 5px;
+}
+
+.status_ablehnung{
+    font-size: 11px;
+    color: red;
+    padding: 3px;
+    background-color: #F8E8EA;
+    border: 1px solid #efc2c2;
+    border-radius: 5px; 
+}
+
+.status_ausstehend{
+    font-size: 11px;
+    color: #585858;
+    padding: 3px;
+    background-color:#e7e8ea;
+    border: 1px solid #D8D8D8;
+    border-radius: 5px;
+}
+
+#row tr:nth-child(2){
+    background:#E6FBE9;
+    outline: thin solid #93C59B;
+}
+
