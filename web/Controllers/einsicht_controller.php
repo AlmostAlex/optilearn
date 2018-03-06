@@ -143,7 +143,7 @@ class einsicht_controller
                 }
             }
             
-            //Gesamtpunktzahl nach der ersten iteraltion bestimmen.
+            //Testausgabe aller Bewerber + Thema + Punkte + Gesamtpunktzahl
             $gesamtPunktzahl = 0;
             $statement_thema_bewerber = $this->belegwunsch->getThemaBewerber($modul_id);
             $statement_thema_bewerber->bind_result($belegwunsch_id, $wunsch_1, $wunsch_2, $wunsch_3);
@@ -155,9 +155,9 @@ class einsicht_controller
                     $gesamtPunktzahl += $array[($array[$belegwunsch_id]['Thema'])]['Punkte'];
                 }
             }
-
             //Prüfen, ob es noch Freie Themen gibt, welche vergeben werden können
             //->Bedingung dafür ist, dass es min. soviele Bewerber gibt wie Themen.
+            
             $statement_modul_themen = $this->thema->getAllModulThema($modul_id);
             $statement_modul_themen->bind_result($thema_id);
             $statement_modul_themen->store_result();
@@ -202,7 +202,6 @@ class einsicht_controller
                         }
                         if($bewerbungErhalten == true)
                         {
-                            //Nach einem Bewerber suchen, der noch kein Thema hat und das alte Thema nehmen könnte
                             $statement_thema_bewerber = $this->belegwunsch->getThemaBewerber($modul_id);
                             $statement_thema_bewerber->bind_result($belegwunsch_id, $wunsch_1, $wunsch_2, $wunsch_3);
                             $statement_thema_bewerber->store_result();
@@ -212,25 +211,16 @@ class einsicht_controller
                                 {
                                     if($wunsch_1 == $TauschThema)
                                     {
-                                        //Sollte man mehr Priorität auf die Wünsche und nicht die Themenvergabe
-                                        //setzen wollen, dann kann man die Punkte geringer setzen.
-                                        //Momentan wird bei den "if"-Abfragen True rauskommen, da die Themenvergabe
-                                        //als Priorität angegeben wurde
                                         $Saldo = 115 + $Punktzahl2 - $Punktzahl1;
                                         if($Saldo >= 0)
                                         {
-                                            //Hier findet der "tausch" statt.
-                                            //Zwischenspeichern des Themas, dass der Bewerber vorher hatte 
                                             $neuesThema = $array[($array[$TauschThema]['Bewerber'])]['Thema'];
-                                            //Punkte aktuallisierung
+                                            
                                             $array[$thema_id]['Punkte'] = $Punktzahl2;
-                                            //Das noch nicht vergebene Thema bekommt nun den Bewerber zugewiesen
                                             $array[$thema_id]['Bewerber'] = ($array[$TauschThema]['Bewerber']);
                                             $array[$thema_id]['Status'] = "Vergeben";
-                                            //Und dem Bewerber wird das Thema zugeordnet
                                             $array[($array[$TauschThema]['Bewerber'])]['Thema'] = $thema_id;
-                                            //Der Bewerber der vorher noch nichts hatte bekommt nun das Thema vom
-                                            //vorherigen Bewerber
+                                            
                                             $array[$neuesThema]['Punkte'] = 115;
                                             $array[$neuesThema]['Bewerber'] = $belegwunsch_id;
                                             $array[$belegwunsch_id]['Status'] = "Hat was!";
@@ -280,7 +270,6 @@ class einsicht_controller
                 }
             }
         }
-        //In der Datenbank den Bewerben die Themen zuordnen und nochmal die Punkte bestimmen.
         $gesamtPunktzahl = 0;
         $statement_thema_bewerber = $this->belegwunsch->getThemaBewerber($modul_id);
         $statement_thema_bewerber->bind_result($belegwunsch_id, $wunsch_1, $wunsch_2, $wunsch_3);
@@ -294,7 +283,6 @@ class einsicht_controller
             }
         }
 
-        //ENDE DES ALGORITHMUS
         $statement_thema_check = $this->thema->getAllModulThema($modul_id);
         $statement_thema_check->bind_result($thema_id);
         $statement_thema_check->store_result();
@@ -378,7 +366,7 @@ class einsicht_controller
                     echo"</tr>"; 
                     echo"<tr>";
                     echo"<td colspan='4'></td>";
-                    echo"<td colspan='1'><center><a data-toggle='modal' data-target='#annahme' title='Annahme per E-Mail'><annahme>✓</annahme></a></center></td>";
+                    echo"<td colspan='1'><center><a data-toggle='modal' data-target='#annahme'><annahme>✓</annahme></a></center></td>";
                     // Sicherheitsabfrage wenn Annahme
                     echo"<div class='modal fade' id='annahme' tabindex='-1' role='dialog' aria-labelledby='annahme' aria-hidden='true'>";
                     echo"<div class='modal-dialog'>";
@@ -413,11 +401,9 @@ class einsicht_controller
         $statement_bewerbungaufmodul = $this->windhund->bewerbungAnzahlGesamt($modul_id);
         $statement_bewerbungaufmodul->bind_result($windhund_id);
         $statement_bewerbungaufmodul->store_result();
-        
-        //Wenn Eintragungen auf Themen in diesem Modul gefunden worden sind
+    
         if(($statement_bewerbungaufmodul->num_rows) !== 0)
         {
-            //Dann hole all diese aus der Datenbank und stelle diese mit den entsprechenden Informationen dar.
             while($statement_bewerbungaufmodul->fetch())
             {
                 $statement_thema_check = $this->thema->getAllModulThema($modul_id);
@@ -492,7 +478,6 @@ class einsicht_controller
                     echo"<tr>";
                     echo"<td colspan='4'></td>";
                     echo"<td colspan='1'><center><a data-toggle='modal' data-target='#annahme' title='Annahme per E-Mail'><annahme>✓</annahme></a></center></td>";
-                    
                     // Sicherheitsabfrage wenn Annahme
                     echo"<div class='modal fade' id='annahme' tabindex='-1' role='dialog' aria-labelledby='annahme' aria-hidden='true'>";
                     echo"<div class='modal-dialog'>";
@@ -520,8 +505,6 @@ class einsicht_controller
                 break;  
             }
         }
-        //Werden keine Eintragungen auf Themen in diesem Modul gefunden, so wird eine rote Meldung angezeigt,
-        // dass noch keine Eintragungen erfolgt sind.
         else
         {
             echo "<div class='alert alert-secondary' role='alert'> <i style='color: red;' class='fa fa-exclamation-triangle' aria-hidden='true'></i> Es sind zur Zeit keine Bewerbungen eingegangen.</div>";
@@ -576,8 +559,8 @@ class einsicht_controller
                         echo "    <tr>   ";     
                         echo "        <th><center>Matrikelnummer</center></th>   ";
                         echo "        <th><center>Studiengang</center></th>";
-                        echo "        <th>Semester</th>";
-                        echo "         <th>Credits</th>";
+                        echo "        <th><center>Semester</center></th>";
+                        echo "         <th><center>Credits</center></th>";
                         echo "         <th><center>Scoring</center></th>   ";
                         echo "         <th><center>Funktionen<BR>         ";
                         echo "        <input type='checkbox' onclick='toggle(this);' /> Alle</center></th>";
@@ -628,7 +611,6 @@ class einsicht_controller
                         echo "<td colspan='1'><center><a data-toggle='modal' data-target='#annahme' title='Annahme per E-Mail'><annahme>✓</annahme></a> ";
                         echo "<a data-toggle='modal' data-target='#ablehnung' title='Ablehnung per E-Mail'><ablehnung>X</ablehnung></a></center></td>";
                         echo "</tr>";
-
                         // Sicherheitsabfrage wenn auf ANNAHME geklickt wird
                         echo"<div class='modal fade' id='annahme' tabindex='-1' role='dialog' aria-labelledby='annahme' aria-hidden='true'>";
                         echo"<div class='modal-dialog'>";
@@ -683,9 +665,9 @@ class einsicht_controller
     {
         // EMAIL CONTENT
         //Load composer's autoloader
-        $mail = new PHPMailer(true);                          // Passing `true` enables exceptions
+        $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
         $mail->isSMTP();                                      // Set mailer to use SMTP
-        $mail->Host = 'smtp.gmail.com';                       // Specify main and backup SMTP servers
+        $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
         $mail->SMTPAuth = true;                               // Enable SMTP authentication
         $mail->Username = 'stickywebsinfo@gmail.com';         // SMTP username
         $mail->Password = 'sticky112';                        // SMTP password
@@ -702,8 +684,11 @@ class einsicht_controller
         //Content
         $mail->isHTML(true);                                  // Set email format to HTML
 
-        //CONFIGURATIONEN ENDE
-        //###########################################################
+//CONFIGURATIONEN ENDE
+// ###########################################################
+// ###########################################################
+// ###########################################################
+// ###########################################################
         
         $statement = $this->modul->getModulbezeichnung($modul_id);
         $statement->bind_result($modulbezeichnung);
@@ -712,12 +697,9 @@ class einsicht_controller
         {
             try 
             {
-                //Betreff definieren
                 $mail->Subject = 'Annahmebestätigung';
-                //Alle ausgewählten emails werden hier durchlaufen
                 for($i = 0; $i < count($_POST['email']); $i++)
                 {
-                    //Status der Bewerber anpassen, sowohl auch den Status der Themen anpassen
                     if($verfahren == "windhund")
                     {
                         $this->windhund->updateStatusGetMail($annahme, $email[$i]);
@@ -732,12 +714,9 @@ class einsicht_controller
                     $email2= $email[$i];
                     $mail->addAddress($email[$i], 'Bewerber');     // Add a recipient
 
-                    //Anhand der Mail die Themenbezeichnung aus der DB holen
                     $statement_thema = $this->thema->getMailThemenbezeichnung($verfahren, $modul_id, $email2);
                     $statement_thema->bind_result($themenbezeichnung);
                     $statement_thema->store_result();
-
-                    //Inhalt der Mail definieren
                     while($statement_thema->fetch())
                     {
                         $mail->Body    = 'Sehr geehrte Studierende,<br><br>
@@ -751,19 +730,18 @@ class einsicht_controller
                         Georg-August-Universität Göttingen<br>
                         Platz der Göttinger Sieben 3 (MZG 5.121)<br>
                         37073 Göttingen';
-
-                        //Absenden der Mail
                         $mail->send();
+                        // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';}
                     }
                 }
-                // Modal zum Erfolgreichen absenden
+                // EMAIL WIRD VERSCHICKT UND GG FEHLERMELDUNG
                 echo"<script>
                 $(window).load(function()
                 {
                     $('#email_sucess').modal('show');
                 });
                 </script>";
-                echo "<div id='email_sucess' class='modal fade' role='dialog'>";
+                echo "<div style='top: 30%' id='email_sucess' class='modal fade' role='dialog'>";
                 echo "<div class='modal-dialog'>";
                 echo "<div class='modal-content'>";
                 echo"<div class='modal-header'>";
@@ -782,7 +760,6 @@ class einsicht_controller
                 echo"</div>";
                 echo"</div>";
             }
-            //Bei misserfolg der Mailversendung wird ein Modal angezeigt, welches darüber berichtet
             catch (Exception $e) 
             {
                 echo"<script>
@@ -815,11 +792,13 @@ class einsicht_controller
 
     public function emailBewerbung($thema_id, $email, $ablehnung, $annahme)
     {
+       
+        echo "drin";
         // EMAIL CONTENT
         //Load composer's autoloader
-        $mail = new PHPMailer(true);                          // Passing `true` enables exceptions
+        $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
         $mail->isSMTP();                                      // Set mailer to use SMTP
-        $mail->Host = 'smtp.gmail.com';                       // Specify main and backup SMTP servers
+        $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
         $mail->SMTPAuth = true;                               // Enable SMTP authentication
         $mail->Username = 'stickywebsinfo@gmail.com';         // SMTP username
         $mail->Password = 'sticky112';                        // SMTP password
@@ -836,8 +815,11 @@ class einsicht_controller
         //Content
         $mail->isHTML(true);                                  // Set email format to HTML
 
-        //CONFIGURATIONEN ENDE
-        //###########################################################
+//CONFIGURATIONEN ENDE
+// ###########################################################
+// ###########################################################
+// ###########################################################
+// ###########################################################
         
         $statement_modul = $this->thema->getBezeichnungModulId($thema_id);
         $statement_modul->bind_result($modul_id, $themenbezeichnung);
@@ -851,10 +833,10 @@ class einsicht_controller
             {
                 try 
                 {
-                    //Wenn der bewerber angenommen wird, dann wird der Status des Bewerbers auf "angenommen" gesetzt
-                    //und das Thema wird auf "vergeben" gesetzt
                     if(isset($_POST['annahme_bewerbung']))
                     {
+                        echo" wir sind in annahme rein gekommen annahme";  
+                        echo"<br>";
                         for($i = 0; $i < count($_POST['email']); $i++)
                         {
                             $this->bewerbung->updateStatusGetMail($annahme, $email, $i);
@@ -875,9 +857,9 @@ class einsicht_controller
                         Platz der Göttinger Sieben 3 (MZG 5.121)<br>
                         37073 Göttingen';
                     }
-                    //Wenn der Bewerber abgelehnt wird, dann wird nur der Bewerberstatus geändert -> auf "abgelehnt"
                     if(isset($_POST['ablehnung_bewerbung']))
                     {
+                        echo "wir sind in ablehnung reingekommen wieso";
                         for($i = 0; $i < count($_POST['email']); $i++)
                         {
                             $statement = $this->bewerbung->updateStatusGetMail($ablehnung, $email, $i);
@@ -897,10 +879,8 @@ class einsicht_controller
                         Platz der Göttinger Sieben 3 (MZG 5.121)<br>
                         37073 Göttingen';
                     }
-                    // Die Mail wird versendet
+                    // EMAIL WIRD VERSCHICKT UND GG FEHLERMELDUNG
                     $mail->send();
-
-                    //Modale zum Erfolg/Misserfolg werden angezeigt
                     echo"<script>
                     $(window).load(function()
                     {

@@ -18,8 +18,7 @@
     vertical-align: inherit;
     border-color: inherit;
     border: 1px solid rgba(34,36,38,.1);
-   
-
+  
 }
 
 .modul_anzeige tr th{
@@ -161,4 +160,153 @@ margin-bottom: 10px;
      background-color:#E8EEDF; 
      border: 1px solid #ACC18A; 
      border-radius: 5px;
+}
+
+/* ÜEBERSICHT ADMIN */
+uebersicht table th{
+font-weight: bold; 
+
+}
+
+  .top{
+    color: #333;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid transparent;    
+    border-color: #ddd;
+    border-top: 4px solid #3979b5;
+    padding: 10px;
+    width: 100%;
+} 
+panel panel-default panel-table {
+    width: 100%;
+    font-size: 12.5px;
+}
+
+.panel-title-dozent{
+    font-size: 1.25rem;
+    border-bottom: 1px solid #efefef;
+    margin-right: 150px;
+}
+
+.panel_table th{
+    margin:0px;
+    border: 1px solid #ddd;
+    padding: 5px;
+    display: table-cell;
+    vertical-align: inherit;
+    font-weight: bold;
+    text-align: center;
+}
+
+uebersicht .btn-group_dozent{
+    float:left;
+    border-radius: 10px;
+    padding: 0px;
+}
+
+uebersicht list .btn{
+  color: #444444; 
+  background-color: #f2f2f2;    
+  transition: all 0.8s ease 0s; 
+  border:1px solid rgba(0, 0, 0, 0.2959795);
+  text-shadow: 0px 0px 9px #ffffff;
+  box-shadow: 0px 0px 1px #aaa, inset 0px 2px 3px #fff;
+
+}
+uebersicht list .btn:hover{
+    color:#444444;
+    background-color: #e8e8e8;  
+}
+
+uebersicht list .btn:active{
+    color: #ffffff;   
+}
+
+uebersicht label{
+    margin-right: 5px;
+}
+
+.panel{
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+
+.panel-body{
+    padding: 15px;
+
+}
+.panel-default{
+   border-color: #ddd; 
+   -webkit-box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.10);
+
+}
+
+uebersicht module tr{
+        border: 1px solid #ddd;
+}
+
+uebersicht a{
+    color: #ffffff;
+}
+
+uebersicht .border_round{
+    display: inline-block;
+    padding: .55em .6em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    border-radius: .25rem;
+    background-color: white;
+    border: 1px solid #ced4da;
+}
+
+uebersicht .table{
+    margin-bottom: 0px;  
+    border-collapse: collapse;
+}
+
+.badge{
+padding: 10px; 
+}
+
+uebersicht span{
+transition: all 0.5s ease 0s;
+}
+
+uebersicht span:hover{
+background: orange;
+}
+uebersicht span a:hover{
+color: #ffffff;
+}
+
+uebersicht module table tr{
+background-color: #F1F0F0;
+}
+
+uebersicht module table td{
+background-color:#fcfcfc;
+inset 0 -1px 0 0 rgba(212,221,228,.5);
+}
+
+inside table, inside th, inside td {
+      //border: 1px solid black;
+      font-size: 14.2px;
+      vertical-align:top;
+}
+
+.panel-footer{
+    padding: 10px 15px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+inside .badge{
+    padding: 8px;
 }

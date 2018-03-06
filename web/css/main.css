@@ -1,15 +1,12 @@
-
 html {
     font-size:14px;
     position: relative;
     min-height: 100%;
 }
 
-
 body {
     margin-bottom: 310px;
 }
-
 
 /* CSS zum Layout */
 .header { 
@@ -552,8 +549,15 @@ small{
     margin-left: 4%;
 }
 
-/* WIndhund Formular */
+#waehle_modul{
+display:none;
+}
 
+report label{
+padding: 0%;
+}
+
+/* Windhund Formular */
 .windhund{
 }
 .windhund table tr td label{
@@ -611,6 +615,11 @@ report .title{
     border-bottom: 1px solid #d9d9d9;
     margin-bottom: 2%;
 }
+
+report label{
+    padding: 0%;
+}
+
 /* Material style */
 export button {
     float:right;  
@@ -701,9 +710,16 @@ reportModal .modal.fade .modal-dialog{
     transition:transform .3s ease-out
 }
 
-reportModal .modal.in .modal-dialog{
+reportModal .modal.in .modal-dialog {
     -webkit-transform:translate(0,0);
     -ms-transform:translate(0,0);
-    transform:translate(0,0)}
+    transform:translate(0,0)
+}
+
+canvas{
+ width:400px !important;
+ height:200px !important;
+}
+
 
 /* Report CSS ENDE */

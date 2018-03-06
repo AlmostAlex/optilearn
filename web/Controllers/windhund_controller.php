@@ -49,7 +49,6 @@ class windhund_controller
                      
             while ($statement->fetch()) 
             { 
-                //Modal zur erfolgreichen Eintragung anzeigen
                 while ($statement_thema->fetch()) 
                 {
                     echo"<script> $(window).load(function() { $('#bewerbung_windhund_erfolgreich').modal('show'); }); </script>";
@@ -76,7 +75,6 @@ class windhund_controller
                 }
             }           
         } 
-        //Wenn bereits in ein Thema im selben Modul eingetragen, adnn Modal zur Fehlgeschlagenen Eintragung
         else 
         {
             echo"<script>

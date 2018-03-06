@@ -3,22 +3,19 @@
 require("Models/modul_model.php");
 require("Models/benutzer_model.php");
 
-class modul_controller 
-{
+class modul_controller {
 
     //Erstellen einer Variable vom Typ benutzer_model, 
     //damit alle Funktionen Zugriff auf diese über $this->modul haben
     public $modul;
 
-    public function __construct() 
-    {
+    public function __construct() {
         $this->modul = new modul_model();
         $this->thema = new thema_model();
         $this->benutzer = new benutzer_model();
     }
 
-    public function ModulEintragung() 
-    {
+    public function ModulEintragung() {
         //Übergabe der Formeingaben, Kontrolle ob diese auch ausgefüllt worden sind und
         //Aufruf der Modelfunktion "LoginKontrolle" mit diesen.
         $modulbezeichnung = $_POST["Bezeichnung"];
@@ -70,11 +67,8 @@ class modul_controller
         }
     }
 
-    //Prüfung und Ausgabe, ob die Eintragung erfolgreich war
-    public function prüfung($eintrag) 
-    {
-        if ($eintrag == TRUE) 
-        {
+    public function prüfung($eintrag) {
+        if ($eintrag == TRUE) {
             echo"<script> $(window).load(function() { $('#modul_success').modal('show'); }); </script>";
             echo"<success><div class='modal fade' id='modul_success' tabindex='0' role='dialog'>";
             echo"<div class='modal-dialog'>";
@@ -96,23 +90,18 @@ class modul_controller
             echo"</div>";
             echo"</div></success>";
             //echo"<meta http-equiv='refresh' content='0; URL=/erfolgreich.php'>"; // Weiterleitung zur Verwaltung 
-        } 
-        else 
-        {
+        } else {
             echo "<div class='alert alert-danger' style='margin-top: 3%; width: 90%; text-align: center; left: 5%;' role='alert'><i class='fa fa-exclamation-circle' aria-hidden='true'></i> <b>Achtung!</b><br>Eintragung fehlgeschlagen.</div>";
         }
     }
 
-    //Formular zur Bearbeitung von Modulen
-    public function ModelübersichtEdit($modul_id) 
-    {
+    public function ModelübersichtEdit($modul_id) {
         //Erstmal wird geschaut, um welche Fristen es sich handelt
         $statement_modul = $this->modul->getModul($modul_id);
         $statement_modul->bind_result($frist_start, $frist_ende, $modulbezeichnung, $semester, $studiengang, $kategorie, $verfahren, $modul_verfuegbarkeit, $nachrueckverfahren);
         $statement_modul->store_result();
         $dec_modul = base64_encode($modul_id);
-        while ($statement_modul->fetch()) 
-        {
+        while ($statement_modul->fetch()) {
             echo"<form method='post'>";
             echo"<div class='edit_div_modul'>";
             date_default_timezone_set("Europe/Berlin");
@@ -122,19 +111,14 @@ class modul_controller
             $start_anzeige = date("d-m-Y", strtotime($frist_start));
             $ende_anzeige = date("d-m-Y", strtotime($frist_ende));
 
-            //Erstellung des Formulars mit den aktuellen Werten als placeholder
-            //und Einschränkungen abhängig von den Fristen und dem aktuellen Datum
             echo"<table class='edit_div_table'>";
             echo"<tr><td colspan='3'><h5>Bearbeitung des Moduls:<br><span>{$modulbezeichnung}</span></h5></td></tr>";
             echo"<tr>";
             echo"<td><label for='Kategorie'><b>Kategorie:</b><red style='color: red'>*</red></label></td>";
-            if ($kategorie == 'Abschlussarbeit') 
-            {
+            if ($kategorie == 'Abschlussarbeit') {
                 echo"<td><center><input style='margin-right: 5px;' type='radio' name='Kategorie' value='Seminararbeit' class='Kategorie' />Seminararbeit</input></center></td>";
                 echo"<td><center><input style='margin-right: 5px;' type='radio' name='Kategorie' value='Abschlussarbeit' class='Kategorie' checked='checked' />Abschlussarbeit</input></center></td>";
-            } 
-            else 
-            {
+            } else {
                 echo"<td><center><input style='margin-right: 5px;' type='radio' name='Kategorie' value='Seminararbeit' class='Kategorie' checked='checked'/>Seminararbeit</input></center></td>";
                 echo"<td><center><input style='margin-right: 5px;' type='radio' name='Kategorie' value='Abschlussarbeit' class='Kategorie'/>Abschlussarbeit</input></center></td>";
             }
@@ -144,15 +128,12 @@ class modul_controller
             echo"<td colspan='2'><input type='text' id='bezeichnung' name='Bezeichnung'  class='form-control' value='{$modulbezeichnung}' required></td>";
             echo"</tr>";
 
-            if ($start <= $aktuell) 
-            {
+            if ($start <= $aktuell) {
                 echo"<tr>";
                 echo"<td><label for='Termine'><b>Bewerbungsfristen:</b><red style='color: red'>*</red></label></td>";
                 echo"<td><input type='text' class='form-control' name='Start' value='$start_anzeige' readonly required></td>";
                 echo"<td><input type='text' class='form-control' name='Ende' value='$ende_anzeige' readonly required></td></tr>";
-            } 
-            else 
-            {
+            } else {
                 echo"<tr>";
                 echo"<td><label for='Termine'><b>Bewerbungsfristen:</b><red style='color: red'>*</red></label></td>";
                 echo"<td><input type='text' class='form-control' name='Start' value='$start_anzeige' id='datepicker_Start' required></td>";
@@ -165,40 +146,31 @@ class modul_controller
             echo"<td><label for='bevStudiengang'><b>bevorzugter Studiengang:</b></label></td>";
             echo"<td colspan='2'>";
             echo"<select class='form-control' name='Studiengang' id='Studiengang' required>";
-            if ($studiengang === 'None') 
-            {
+            if ($studiengang === 'None') {
                 echo"       <option value='None'>Keiner</option>";
                 echo"       <option value='Betriebswirtschaftlehre'>Betriebswirtschaftslehre</option>";
                 echo"       <option value='Wirtschaftsinformatik'>Wirtschaftsinformatik</option>";
                 echo"       <option value='Volkswirtschaftslehre'>Volkswirtschaftslehre</option>";
                 echo"       <option value='Wirtschaftspädagogik'>Wirtschaftspädagogik</option>";
-            } 
-            elseif ($studiengang === 'Wirtschaftsinformatik') 
-            {
+            } elseif ($studiengang === 'Wirtschaftsinformatik') {
                 echo"       <option value='Wirtschaftsinformatik'>Wirtschaftsinformatik</option>";
                 echo"       <option value='Betriebswirtschaftlehre'>Betriebswirtschaftslehre</option>";
                 echo"       <option value='Volkswirtschaftslehre'>Volkswirtschaftslehre</option>";
                 echo"       <option value='Wirtschaftspädagogik'>Wirtschaftspädagogik</option>";
                 echo"       <option value='None'>Keiner</option>";
-            } 
-            elseif ($studiengang === 'Betriebswirtschaftlehre') 
-            {
+            } elseif ($studiengang === 'Betriebswirtschaftlehre') {
                 echo"       <option value='Betriebswirtschaftlehre'>Betriebswirtschaftlehre</option>";
                 echo"       <option value='Wirtschaftsinformatik'>Wirtschaftsinformatik</option>";
                 echo"       <option value='Volkswirtschaftslehre'>Volkswirtschaftslehre</option>";
                 echo"       <option value='Wirtschaftspädagogik'>Wirtschaftspädagogik</option>";
                 echo"       <option value='None'>Keiner</option>";
-            } 
-            elseif ($studiengang === 'Volkswirtschaftslehre') 
-            {
+            } elseif ($studiengang === 'Volkswirtschaftslehre') {
                 echo"       <option value='Volkswirtschaftslehre'>Volkswirtschaftslehre</option>";
                 echo"       <option value='Betriebswirtschaftlehre'>Betriebswirtschaftslehre</option>";
                 echo"       <option value='Wirtschaftsinformatik'>Wirtschaftsinformatik</option>";
                 echo"       <option value='Wirtschaftspädagogik'>Wirtschaftspädagogik</option>";
                 echo"       <option value='None'>Keiner</option>";
-            } 
-            elseif ($studiengang === 'Wirtschaftspädagogik') 
-            {
+            } elseif ($studiengang === 'Wirtschaftspädagogik') {
                 echo"       <option value='Wirtschaftspädagogik'>Wirtschaftspädagogik</option>";
                 echo"       <option value='Volkswirtschaftslehre'>Volkswirtschaftslehre</option>";
                 echo"       <option value='Betriebswirtschaftlehre'>Betriebswirtschaftslehre</option>";
@@ -210,32 +182,24 @@ class modul_controller
             echo"<tr>";
             echo"<td><label for='verf'><b>Verfahren:<red style='color: red'>*</red></b></label></td>";
 
-            if ($start > $aktuell) 
-            {
+            if ($start > $aktuell) {
                 echo"<td colspan='2'><select class='form-control' name='verfahren' id='verfahren' required>";
 
-                if ($verfahren === 'Windhundverfahren') 
-                {
+                if ($verfahren === 'Windhundverfahren') {
                     echo"       <option value='Windhundverfahren'>Windhundverfahren</option>";
                     echo"       <option value='Bewerbungsverfahren'>Bewerbungsverfahren</option>";
                     echo"       <option value='Belegwunschverfahren'>Belegwunschverfahren</option>";
-                } 
-                elseif ($verfahren === 'Bewerbungsverfahren') 
-                {
+                } elseif ($verfahren === 'Bewerbungsverfahren') {
                     echo"       <option value='Bewerbungsverfahren'>Bewerbungsverfahre</option>";
                     echo"       <option value='Windhundverfahren'>Windhundverfahren</option>";
                     echo"       <option value='Belegwunschverfahren'>Belegwunschverfahren</option>";
-                } 
-                elseif ($verfahren === 'Belegwunschverfahren') 
-                {
+                } elseif ($verfahren === 'Belegwunschverfahren') {
                     echo"       <option value='Belegwunschverfahren'>Belegwunschverfahren</option>";
                     echo"       <option value='Windhundverfahren'>Windhundverfahren</option>";
                     echo"       <option value='Bewerbungsverfahren'>Bewerbungsverfahren</option>";
                     echo" </select>";
                 }
-            } 
-            else 
-            {
+            } else {
                 echo"<td colspan='2'><input type='text' class='form-control' name='verfahren' value='$verfahren' readonly required>";
             }
             echo"</td>";
@@ -248,8 +212,7 @@ class modul_controller
             $statement_thema->bind_result($themenbezeichnung, $beschreibung, $thema_id, $thema_verfügbarkeit);
             $statement_thema->store_result();
             echo"<ul>";
-            while ($statement_thema->fetch()) 
-            {
+            while ($statement_thema->fetch()) {
                 $dec_thema = base64_encode($thema_id);
                 echo"<li> <a href='edit_thema.php?action=editThema&id={$dec_thema}'><i class='far fa-edit'></i></a> {$themenbezeichnung}</li>";
             }
@@ -257,10 +220,7 @@ class modul_controller
         }
     }
 
-    //Erstellen der Übersicht von der View "Mt_Verwaltung"
-    public function ModulübersichtDozent() 
-    {
-        //Alle Module holen, welche nicht archiviert sind
+    public function ModulübersichtDozent() {
         $statement_modul = $this->modul->getAllModule("false");
         $statement_modul->bind_result($modul_id, $modulbezeichnung, $kategorie, $verfahren, $semester, $frist_start, $frist_ende, $benutzer_id, $studiengang, $modul_verfuegbarkeit, $nachrueckverfahren);
         $statement_modul->store_result();
@@ -295,16 +255,11 @@ class modul_controller
         echo"</tr>";
         echo"</table>";
 
-        //Darstellung der Module und Funktionen
-        while ($statement_modul->fetch()) 
-        {
-            if ($nachrueckverfahren == "Aktiv") 
-            {
+        while ($statement_modul->fetch()) {
+            if ($nachrueckverfahren == "Aktiv") {
                 $verfahren_scheinvariable = "Windhundverfahren";
                 $nachrueck_nachricht = "[Nachrückverfahren]";
-            } 
-            else 
-            {
+            } else {
                 $verfahren_scheinvariable = $verfahren;
                 $nachrueck_nachricht = '';
             }
@@ -332,8 +287,7 @@ class modul_controller
                 $delete_modul_btn = "";
             }
 
-            // Themen werden geholt in Abh. der ID des Moduls
-            $statement_thema = $this->thema->getModulThema($modul_id); 
+            $statement_thema = $this->thema->getModulThema($modul_id); // Themen werden geholt in Abh. der ID des Moduls
             $statement_thema->bind_result($themenbezeichnung, $beschreibung, $thema_id, $thema_verfügbarkeit);
             $statement_thema->store_result();
 
@@ -342,24 +296,20 @@ class modul_controller
             $statement_nachrückverfahren->bind_result($nachrueckverfahren);
             $statement_nachrückverfahren->store_result();
 
-            while ($statement_nachrückverfahren->fetch()) 
-            {
-                if ($verfahren == "Windhundverfahren" || $verfahren == "Belegwunschverfahren") 
-                {
+            while ($statement_nachrückverfahren->fetch()) {
+                if ($verfahren == "Windhundverfahren" || $verfahren == "Belegwunschverfahren") {
                     $einsicht_bewerbungen_windhund_belegwunsch = "<span data-toggle='tooltip' data-placement='top' title='Bewerbungen einsehen vom {$verfahren}' class='badge badge-info'><a href='einsicht.php?action={$verfahren}&id={$dec_modul}'><i class='fas fa-users'></i></a></span>";
                 } else {
                     $einsicht_bewerbungen_windhund_belegwunsch = "";
                 }
 
-                if ($verfahren == 'Belegwunschverfahren') 
-                {
+                if ($verfahren == 'Belegwunschverfahren') {
                     $auswertung = "<a href='beleg.php?action=auswertung&id={$dec_modul}'><i class='fas fa-sync-alt'></i></a>";
                 } else {
                     $auswertung = "";
                 }
-                // Im Modal wird bei Beleg-oderBewerbungsverfahren erwähnt, dass das Verfahren zum "Windhundverfahren" geändert wird.
-                if ($verfahren == "Windhundverfahren") 
-                {
+                // Im Modal wird bei Beleg-oderBewerbungsverfahren erwhnt, dass sich das Verfahren zum "Windhundverfahren" geändert wird.
+                if ($verfahren == "Windhundverfahren") {
                     $modalTextInhalte = "";
                 } else {
                     $modalTextInhalte = "<center><i style='color: red;' class='fas fa-exclamation-triangle'></i> Beachten Sie, dass das Verfahren dieses Moduls automatisch zum <b>\"Windhundverfahren\"</b> umgeändert wird.</center>";
@@ -370,11 +320,9 @@ class modul_controller
                 $ThemaAnzahl_verfuegbar = $this->thema->getModulThemaAnzahlVerfuegbar($modul_id, "Verfügbar");
                 $ThemaAnzahl_verfuegbar->bind_result($anzahl_thema_verfuegbar);
                 $ThemaAnzahl_verfuegbar->store_result();
-                while ($ThemaAnzahl_verfuegbar->fetch()) 
-                {
+                while ($ThemaAnzahl_verfuegbar->fetch()) {
                     // Wenn heute > frist ende ODER anzahl der Themen == 0, dann ist das modul vergeben! Ansonsten Verfügbar
-                    if (($heute_dt > $frist_end) || ($anzahl_thema_verfuegbar == "0")) 
-                    {
+                    if (($heute_dt > $frist_end) || ($anzahl_thema_verfuegbar == "0")) {
                         $archivierung = "<span data-toggle='tooltip' data-placement='top' title='Modul archvieren' class='badge badge-warning'><a data-toggle='modal' data-target='#archivierung_{$modul_id}' href='#'><i class='far fa-file-archive'></i></a></span>";
                         $this->modul->updateModulVerfuegbarkeit($modul_id, "Vergeben");
                     } else {
@@ -382,8 +330,7 @@ class modul_controller
                         $archivierung = "";
                     }
                     // Ein Nachrückverfahren kann statt finden, wenn heute > ende und anzahl der Themen > 0 ist
-                    if (($heute_dt > $frist_end) && ($anzahl_thema_verfuegbar > 0)) 
-                    {
+                    if (($heute_dt > $frist_end) && ($anzahl_thema_verfuegbar > 0)) {
                         $nachrückverfahren = "<span data-toggle='tooltip' data-placement='top' title='Nachrückverfahren einleiten' class='badge badge-primary'><a data-toggle='modal' data-target='#nachrückverfahren_$modul_id' href='#'><i class='far fa-clock'></i></a></span>"; 
                     } else {
                         $nachrückverfahren = "";
@@ -393,13 +340,11 @@ class modul_controller
                     $statement_anzahl->bind_result($anzahl);
                     $statement_anzahl->store_result();
                 
-                    if($modul_verfuegbarkeit=='Verfügbar')
-                    {
+                    if($modul_verfuegbarkeit=='Verfügbar'){
                         $modul_v = "Offen";
                     }
-                    else
-                    {
-                       $modul_v = "Geschlossen";
+                    else{
+                       $modul_v = "Geschlossen";  
                     }
 
                     echo"<table id='mytable' class='table table-striped table-bordered table-list'>";
@@ -411,6 +356,7 @@ class modul_controller
                     echo"<td style='width:200px;' align='center'>";
                     echo"<span data-toggle='tooltip' data-placement='top' title='Modul editieren' class='badge badge-secondary'><a href='/edit_modul.php?action=editModul&id=$dec_modul'><i class='far fa-edit'></i></a></span>";
                     echo" $delete_modul_btn";
+                  //  echo"$auswertung";
                     echo" $nachrückverfahren";
                     echo" $einsicht_bewerbungen_windhund_belegwunsch ";
                     echo" <span data-toggle='tooltip' data-placement='top' title='Thema hinzufügen'  class='badge badge-success'><a href='/add_thema.php?action=addthema&id={$dec_modul}'><i class='far fa-plus-square'></i></a></span>";
@@ -418,108 +364,99 @@ class modul_controller
                     echo"</td>";
                     echo"</tr></table>";
                     
-                    // Sicherheitsabfrage, ob man das Nachrückverfahren wirklich einleiten will
-                    echo"<div class='modal fade' id='nachrückverfahren_$modul_id' tabindex='-1' role='dialog' aria-labelledby='exampleModalLongTitle'  aria-hidden='true'>";
-                    echo"<div class='modal-dialog'>";
-                    echo"<div class='modal-content'>";
-                    echo"<div class='modal-header'>";
-                    echo"<h5 class='modal-title' id='titel'>Sicherheitsabfrage: Nachrückverfahren einleiten?</h5>";
-                    echo"<button type='button' class='close' data-dismiss='modal' aria-label='Close'>";
-                    echo"<span aria-hidden='true'>&times;</span></button>";
-                    echo"</div>";
-                    echo"<div class='modal-body'><p>";          
-                    echo"<div class='well'>";
-                    echo"Durch das Ausführen des Nachrückverfahrens wird die Endfrist des Moduls um 7 Tage, vom aktuellen Datum an, verlängert. ";
-                    echo"Der neue Endzeitpunkt wird somit von <b>{$aktuell_datum_anzeige}</b> auf <b>{$frist_ende_neu}</b> verlängert. <br><br>";
-                    echo"{$modalTextInhalte}</div></p>";
-                    echo"<p class='debug-url'></p>";
-                    echo"</div> ";
-                    echo"<div class='modal-footer'>";
-                    echo"<button type='button' class='btn btn-default' data-dismiss='modal'>Fenster schließen</button>";
-                    echo"<a href='?action=nachrückverfahren&id={$dec_modul}' style='background-color:#3979b5;' class='btn btn-primary'>Nachrückverfahren einleiten</a>";
-                    echo"</div>";
-                    echo"</div>";
-                    echo"</div>";
-                    echo"</div>"; 
-                    
-                    // Sicherheitsabfrage, ob man das Modul wirklich archvieren will
-                    echo"<div class='modal fade' id='archivierung_{$modul_id}' tabindex='-1' role='dialog' aria-hidden='true'>";
-                    echo"<div class='modal-dialog'>";
-                    echo"<div class='modal-content'>";
-                    echo"<div class='modal-header'>";
-                    echo"<h5 class='modal-title' id='titel'>Sicherheitsabfrage: Modul archvieren?</h5>";
-                    echo"<button type='button' class='close' data-dismiss='modal' aria-label='Close'>";
-                    echo"<span aria-hidden='true'>&times;</span></button>";
-                    echo"</div>";
-                    echo"<div class='modal-body'><p>";          
-                    echo"<div class='well'>Wollen sie das Modul \"<b>{$modulbezeichnung}</b>\" mit den dazgehörigen Daten sicher archivieren?</div></p>";
-                    echo"<p class='debug-url'></p>";
-                    echo"</div> ";
-                    echo"<div class='modal-footer'>";
-                    echo"<button type='button' class='btn btn-default' data-dismiss='modal'>Fenster schließen</button>";
-                    echo"<a href='?action=archivierung&id={$dec_modul}' style='background-color:#3979b5;' class='btn btn-primary'>Modul archivieren</a>";
-                    echo"</div>";
-                    echo"</div>";
-                    echo"</div>";
-                    echo"</div>";
-                    
-                    // Sicherheitsabfrage,  WENN MAN EIN GESAMTES MODUL LÖSCHEN WILL            
-                    echo"<div class='modal fade' id='delete_modal_$modul_id' tabindex='-1' role='dialog' aria-hidden='true'>";
-                    echo"<div class='modal-dialog'>";
-                    echo"<div class='modal-content'>";
-                    echo"<div class='modal-header'>";
-                    echo"<h5 class='modal-title' id='titel'>Sicherheitsabfrage: Modul löschen?</h5>";
-                    echo"<button type='button' class='close' data-dismiss='modal' aria-label='Close'>";
-                    echo"<span aria-hidden='true'>&times;</span></button>";
-                    echo"</div>";
-                    echo"<div class='modal-body'>";   
-                    echo"<div class='well'>";
-                    echo"<center>Wollen sie das Modul <b>\"{$modulbezeichnung}\"</b> mit den dazugehörigen Themen und Daten wirklich löschen?</center></div>";
-                    echo"<p class='debug-url'></p>";
-                    echo"</div>";
-                    echo"<div class='modal-footer'>";
-                    echo"<button type='button' class='btn btn-default' data-dismiss='modal'>Fenster schließen</button>";
-                    echo"<a href='?action=deleteModul&id=$dec_modul' class='btn btn-danger btn-ok'><i class='far fa-trash-alt'></i> Modul löschen</a>";
-                    echo"</div>";
-                    echo"</div>";
-                    echo"</div>";
-                    echo"</div>";
-                    
+                // Sicherheitsabfrage, ob man das Nachrückverfahren wirklich einleiten will
+                echo"<div class='modal fade' id='nachrückverfahren_$modul_id' tabindex='-1' role='dialog' aria-labelledby='exampleModalLongTitle'  aria-hidden='true'>";
+                echo"<div class='modal-dialog'>";
+                echo"<div class='modal-content'>";
+                echo"<div class='modal-header'>";
+                echo"<h5 class='modal-title' id='titel'>Sicherheitsabfrage: Nachrückverfahren einleiten?</h5>";
+                echo"<button type='button' class='close' data-dismiss='modal' aria-label='Close'>";
+                echo"<span aria-hidden='true'>&times;</span></button>";
+                echo"</div>";
+                echo"<div class='modal-body'><p>";          
+                echo"<div class='well'>";
+                echo"Durch das Ausführen des Nachrückverfahrens wird die Endfrist des Moduls um 7 Tage, vom aktuellen Datum an, verlängert. ";
+                echo"Der neue Endzeitpunkt wird somit von <b>{$aktuell_datum_anzeige}</b> auf <b>{$frist_ende_neu}</b> verlängert. <br><br>";
+                echo"{$modalTextInhalte}</div></p>";
+                echo"<p class='debug-url'></p>";
+                echo"</div> ";
+                echo"<div class='modal-footer'>";
+                echo"<button type='button' class='btn btn-default' data-dismiss='modal'>Fenster schließen</button>";
+                echo"<a href='?action=nachrückverfahren&id={$dec_modul}' style='background-color:#3979b5;' class='btn btn-primary'>Nachrückverfahren einleiten</a>";
+                echo"</div>";
+                echo"</div>";
+                echo"</div>";
+                echo"</div>"; 
+
+                // Sicherheitsabfrage, ob man das Modul wirklich archvieren will
+                echo"<div class='modal fade' id='archivierung_{$modul_id}' tabindex='-1' role='dialog' aria-hidden='true'>";
+                echo"<div class='modal-dialog'>";
+                echo"<div class='modal-content'>";
+                echo"<div class='modal-header'>";
+                echo"<h5 class='modal-title' id='titel'>Sicherheitsabfrage: Modul archvieren?</h5>";
+                echo"<button type='button' class='close' data-dismiss='modal' aria-label='Close'>";
+                echo"<span aria-hidden='true'>&times;</span></button>";
+                echo"</div>";
+                echo"<div class='modal-body'><p>";          
+                echo"<div class='well'>Wollen sie das Modul \"<b>{$modulbezeichnung}</b>\" mit den dazgehörigen Daten sicher archivieren?</div></p>";
+                echo"<p class='debug-url'></p>";
+                echo"</div> ";
+                echo"<div class='modal-footer'>";
+                echo"<button type='button' class='btn btn-default' data-dismiss='modal'>Fenster schließen</button>";
+                echo"<a href='?action=archivierung&id={$dec_modul}' style='background-color:#3979b5;' class='btn btn-primary'>Modul archivieren</a>";
+                echo"</div>";
+                echo"</div>";
+                echo"</div>";
+                echo"</div>";
+                
+                // Sicherheitsabfrage,  WENN MAN EIN GESAMTES MODUL LÖSCHEN WILL            
+                echo"<div class='modal fade' id='delete_modal_$modul_id' tabindex='-1' role='dialog' aria-hidden='true'>";
+                echo"<div class='modal-dialog'>";
+                echo"<div class='modal-content'>";
+                echo"<div class='modal-header'>";
+                echo"<h5 class='modal-title' id='titel'>Sicherheitsabfrage: Modul löschen?</h5>";
+                echo"<button type='button' class='close' data-dismiss='modal' aria-label='Close'>";
+                echo"<span aria-hidden='true'>&times;</span></button>";
+                echo"</div>";
+                echo"<div class='modal-body'>";   
+                echo"<div class='well'>";
+                echo"<center>Wollen sie das Modul <b>\"{$modulbezeichnung}\"</b> mit den dazugehörigen Themen und Daten wirklich löschen?</center></div>";
+                echo"<p class='debug-url'></p>";
+                echo"</div>";
+                echo"<div class='modal-footer'>";
+                echo"<button type='button' class='btn btn-default' data-dismiss='modal'>Fenster schließen</button>";
+                echo"<a href='?action=deleteModul&id=$dec_modul' class='btn btn-danger btn-ok'><i class='far fa-trash-alt'></i> Modul löschen</a>";
+                echo"</div>";
+                echo"</div>";
+                echo"</div>";
+                echo"</div>";
+
                     echo"<inside>";
                     echo"<div id='modulid_{$modul_id}' class='collapse' role='tabpanel' aria-labelledby='headingOne' data-parent='#accordion'>";
                     echo"<table width='100%' id='mytable' class='table table-striped table-bordered table-list'>";
                     
-                    while ($statement_anzahl->fetch()) 
-                    {
-                        while ($statement_thema->fetch()) 
-                        {
+                    while ($statement_anzahl->fetch()) {
+                        while ($statement_thema->fetch()) {
                             $dec_thema = base64_encode($thema_id);
                             // Modal Text wenn nur ein Item vorhanden, dann wird im Modal eine Bemerkung erscheinen 
                             // Wenn es nur ein Thema gibt, dann wird der Delete Button zu "Modul löschen" geändert. 
-                            if ($anzahl == 1) 
-                            {
+                            if ($anzahl == 1) {
                                 $note = "<i style='color: red;' class='fas fa-exclamation-triangle'></i> Beachten Sie, dass das Modul nur <b>dieses Thema</b> beinhaltet, somit wird durch die Löschung dieses Themas das <b>gesamte Modul</b> gelöscht.";
                                 $modal_delete_btn = "<a href='?action=deleteModul&id=$dec_modul' class='btn btn-danger btn-ok'><i class='far fa-trash-alt'></i> Modul löschen</a>";
-                            } 
-                            else 
-                            {
+                            } else {
                                 $note = "";
                                 $modal_delete_btn = "<a href='?action=deleteThema&id=$dec_thema' class='btn btn-danger btn-ok'><i class='far fa-trash-alt'></i> Thema löschen</a>";
                             }
-                            if ($start_dt > $heute_dt) 
-                            {
+
+                            if ($start_dt > $heute_dt) {
                                 $delete_thema_btn = "<span data-toggle='tooltip' data-placement='top' title='Thema löschen' class='badge badge-danger'><a href='?action=delete&id=$dec_thema' data-toggle='modal' data-target='#confirm-delete_{$thema_id}'><i class='far fa-trash-alt'></i></a></span>";
-                            } 
-                            else 
-                            {
+                            } else {
                                 $delete_thema_btn = "";
                             }
-                            if ($verfahren == "Bewerbungsverfahren") 
-                            {
+
+                            if ($verfahren == "Bewerbungsverfahren") {
                                 $einsicht_bewerbungen = "<span data-toggle='tooltip' data-placement='top' title='Bewerbungen einsehen'  class='badge badge-info'><a href='einsicht.php?action={$verfahren}&id={$dec_thema}'><i class='fas fa-users'></i></a></span>";
-                            } 
-                            else 
-                            {
+                            } else {
                                 $einsicht_bewerbungen = "";
                             }
                             echo"<tr data-status='{$modul_verfuegbarkeit}'>";
@@ -528,33 +465,33 @@ class modul_controller
                             echo"<td style='130px;'><center>{$thema_verfügbarkeit}</center></td>";
                             echo"<td style='width:198px;' align='center'>";
                             echo"<span data-toggle='tooltip' data-placement='top' title='Thema editieren'  class='badge badge-secondary'><a href='/edit_thema.php?action=editThema&id=$dec_thema'><i class='far fa-edit'></i></a></span> "; 
+
                             echo"$delete_thema_btn ";
                             echo"$einsicht_bewerbungen </td>";
                             echo"</tr>";
                             
-                            // MODAL -> CONFIRMATION  WENN MAN EIN THEMA LÖSCHEN WILL
-                            echo"<div class='modal fade' id='confirm-delete_{$thema_id}' tabindex='0' role='dialog'>";
-                            echo"<div class='modal-dialog'>";
-                            echo"<div class='modal-content'>";
-                            echo"<div class='modal-header'>";
-                            echo"<h5 class='modal-title' id='titel'>Sicherheitsabfrage: Thema löschen?</h5>";
-                            echo"<button type='button' class='close' data-dismiss='modal' aria-label='Close'>";
-                            echo"<span aria-hidden='true'>&times;</span></button>";
-                            echo"</div>";
-                            echo"<div class='modal-body'>";
-                            echo"<div class='well'>";
-                            echo"Sind Sie sich sicher, dass das Thema <b>\"{$themenbezeichnung}\"</b> aus dem Modul <b>\"{$modulbezeichnung}\"</b> und die dazgehörigen Daten sicher gelöscht werden sollen?<br><br><center>{$note}</center></div></center></div>";
-                            echo"<div class='modal-footer'>";
-                            echo"<button type='button' class='btn btn-default' data-dismiss='modal'>Fenster schließen</button>";
-                            echo"$modal_delete_btn";
-                            echo"</div>";
-                            echo"</div>";
-                            echo"</div>";
-                            echo"</div>";                       
+                        // MODAL -> CONFIRMATION  WENN MAN EIN THEMA LÖSCHEN WILL
+                        echo"<div class='modal fade' id='confirm-delete_{$thema_id}' tabindex='0' role='dialog'>";
+                        echo"<div class='modal-dialog'>";
+                        echo"<div class='modal-content'>";
+                        echo"<div class='modal-header'>";
+                        echo"<h5 class='modal-title' id='titel'>Sicherheitsabfrage: Thema löschen?</h5>";
+                        echo"<button type='button' class='close' data-dismiss='modal' aria-label='Close'>";
+                        echo"<span aria-hidden='true'>&times;</span></button>";
+                        echo"</div>";
+                        echo"<div class='modal-body'>";
+                        echo"<div class='well'>";
+                        echo"Sind Sie sich sicher, dass das Thema <b>\"{$themenbezeichnung}\"</b> aus dem Modul <b>\"{$modulbezeichnung}\"</b> und die dazgehörigen Daten sicher gelöscht werden sollen?<br><br><center>{$note}</center></div></center></div>";
+                        echo"<div class='modal-footer'>";
+                        echo"<button type='button' class='btn btn-default' data-dismiss='modal'>Fenster schließen</button>";
+                        echo"$modal_delete_btn";
+                        echo"</div>";
+                        echo"</div>";
+                        echo"</div>";
+                        echo"</div>";                       
                         }
                     }
-                }
-                echo"</table>";
+                }echo"</table>";
             }
             echo"</div>";
             echo"</inside>";
@@ -568,26 +505,26 @@ class modul_controller
         echo"</div>";
         echo"</uebersicht><br><br><br><br>";
     }
-    
-    public function nachrückverfahren($modul_id) 
-    {
-        //Es werden sowohl die Fristen des Moduls benötigt
+
+    public function nachrückverfahren($modul_id) {
+        // Es werden sowohl die Fristen des Moduls benötigt
         $statement = $this->modul->getModulFristen($modul_id);
         $statement->bind_result($frist_start, $frist_ende);
         $statement->store_result();
-        
-        while ($statement->fetch()) 
-        {    
-            $aktuell = date('Y-m-d'); 
-            $ende_anzeige = date("d-m-Y", strtotime($frist_ende));
-            $frist_ende_neu = date("Y-m-d", strtotime($aktuell . "+7 day"));   
-            // Damit die Zeiten in d m Y angezeigt werden
-            // $ende_neu_anzeige = date("d-m-Y", strtotime($frist_ende_neu));
-            $frist_ende_neu_anzeige = date("d-m-Y", strtotime($frist_ende_neu));
-            $ende_anzeige = date("d-m-Y", strtotime($frist_ende));
 
-            $status = "Aktiv";
-            $this->modul->updateFristEnde($modul_id, $status, $frist_ende_neu);  
+        while ($statement->fetch()) {    
+           $aktuell = date('Y-m-d'); 
+           $ende_anzeige = date("d-m-Y", strtotime($frist_ende));
+           $frist_ende_neu = date("Y-m-d", strtotime($aktuell . "+7 day"));   
+           // Damit die Zeiten in d m Y angezeigt werden
+          // $ende_neu_anzeige = date("d-m-Y", strtotime($frist_ende_neu));
+           $frist_ende_neu_anzeige = date("d-m-Y", strtotime($frist_ende_neu));
+
+          // echo $ende_neu_anzeige;
+           
+           $ende_anzeige = date("d-m-Y", strtotime($frist_ende));
+           $status = "Aktiv";
+           $this->modul->updateFristEnde($modul_id, $status, $frist_ende_neu);  
             echo"<script> $(window).load(function() { $('#nachrückverfahren_success').modal('show'); }); </script>";
             echo"<success><div class='modal fade' id='nachrückverfahren_success' tabindex='0' role='dialog'>";
             echo"<div class='modal-dialog'>";
@@ -609,16 +546,15 @@ class modul_controller
             echo"</div></success>";            
         }
     }
-    
-    public function archivierung($modul_id)
-    {
-        $this->modul->updateModulArchivierung($modul_id,"true");
+
+public function archivierung($modul_id){
+    $this->modul->updateModulArchivierung($modul_id,"true");
+ 
         $statement = $this->modul->getModulbezeichnung($modul_id);
         $statement->bind_result($modulbezeichnung);
         $statement->store_result();
-        
-        while ($statement->fetch()) 
-        { 
+
+            while ($statement->fetch()) { 
             echo"<script> $(window).load(function() { $('#archivierung_success').modal('show'); }); </script>";
             echo"<success><div class='modal fade' id='archivierung_success' tabindex='0' role='dialog'>";
             echo"<div class='modal-dialog'>";
@@ -638,24 +574,20 @@ class modul_controller
             echo"</div>";
             echo"</div>";
             echo"</div></success>";
-        }
     }
-    
-    public function ModulübersichtStudent($statement) 
-    {
+}
+
+    public function ModulübersichtStudent($statement) {
         $statement->bind_result($modul_id, $modulbezeichnung, $kategorie, $verfahren, $semester, $frist_start, $frist_ende, $benutzer_id, $studiengang, $modul_verfuegbarkeit, $nachrueckverfahren);
         $statement->store_result();
-        
         //Module werden aufgerufen
-        while ($statement->fetch()) 
-        {       
-            if($nachrueckverfahren == "Aktiv")
-            {
+
+        while ($statement->fetch()) {       
+            if($nachrueckverfahren == "Aktiv"){
                 $verfahren_scheinvariable = "Windhundverfahren";
                 $nachrueck_nachricht = "[Nachrückverfahren]";
             }
-            else
-            {
+            else{
                 $verfahren_scheinvariable = $verfahren;
                 $nachrueck_nachricht = '';
             }
@@ -666,36 +598,34 @@ class modul_controller
             $aktuell_datum = date("Y-m-d");
             $heute_dt = new DateTime($aktuell_datum);
             $end_dt = new DateTime($frist_ende);
+            // Ende der aktuellen Zeit
 
             $statement1 = $this->thema->getModulThema($modul_id);
             $statement1->bind_result($themenbezeichnung, $beschreibung, $thema_id, $thema_verfügbarkeit);
             $statement1->store_result();
-            
+
             $ThemaAnzahl_verfuegbar = $this->thema->getModulThemaAnzahlVerfuegbar($modul_id, "Verfügbar");
             $ThemaAnzahl_verfuegbar->bind_result($anzahl_thema_verfuegbar);
             $ThemaAnzahl_verfuegbar->store_result();
-            while ($ThemaAnzahl_verfuegbar->fetch())
-            {
+            while ($ThemaAnzahl_verfuegbar->fetch()) {
+
                 $start_anzeige = date("d-m-Y", strtotime($frist_start));
                 $ende_anzeige = date("d-m-Y", strtotime($frist_ende));
-                
-                if (($heute_dt > $end_dt) || ($anzahl_thema_verfuegbar == "0")) 
-                {
+
+                if (($heute_dt > $end_dt) || ($anzahl_thema_verfuegbar == "0")) {
                     $btn = "<button type='button' class='btn btn-secondary disabled btn' style='float: right; min-width: 170px; min-height: 40px; margin-bottom: 15px; margin-right:10px; margin-top: 20px; border-radius: 10px;'>Anmeldung gesperrt</button>";
                     // Wenn die Zeit ueberschritten ist, dann wird die Verfügbarkeit des Themas auf "Vergeben" gesetzt.         
                     $this->modul->updateModulVerfuegbarkeit($modul_id, "Vergeben");
-                } 
-                else 
-                {
+                } else {
                     $this->modul->updateModulVerfuegbarkeit($modul_id, "Verfügbar");
                     $btn = "<a href='bewerbungsformular_{$verfahren}.php?action=bewerbung_{$verfahren}&id={$dec_modul}'> <button type='button' class='btn btn-success btn' style='float: right; min-width: 170px; min-height: 40px; margin-bottom: 15px; margin-right:10px; margin-top: 20px; border-radius: 10px;'>zur Anmeldung</button></a>";
                 }
                 
-                // Wenn Nachrückverfahren aktiv ist, dann ändert sich das Verfahren zum Windhundverfahren - dh es wird kein Update durchgeführt
+              // Wenn Nachrückverfahren aktiv ist, dann ändert sich das Verfahren zum Windhundverfahren - dh es wird kein Update durchgeführt
                 $statement_nachrückverfahren = $this->modul->getModulNachrückverfahren($modul_id);
                 $statement_nachrückverfahren->bind_result($nachrueckverfahren);
                 $statement_nachrückverfahren->store_result();
-                
+
                 echo "<div class='modul_anzeige'>";
                 echo "<table style='border-top: 4px solid #3979b5;'> ";
                 echo "<tr>";
@@ -717,19 +647,14 @@ class modul_controller
                 echo "<th style='width:15%' class='bold_title'><center>Betreuer</center></th>";
                 echo "<th style='width:20%' class='bold_title'><center>Verfügbarkeit</center></th>";
                 echo "</tr>";
-                while ($statement1->fetch()) 
-                {
-                    if (empty($beschreibung)) 
-                    {
+                while ($statement1->fetch()) {
+                    if (empty($beschreibung)) {
                         $beschreibung = "Keine Beschreibung vorhanden.";
                     }
-                    
-                    if ($thema_verfügbarkeit == 'Vergeben') 
-                    {
+
+                    if ($thema_verfügbarkeit == 'Vergeben') {
                         $vergeben = "class='vergeben';";
-                    } 
-                    else 
-                    {
+                    } else {
                         $vergeben = "class='verfügbar'";
                     }
                     echo"<tr style='border-bottom: 0px solid #ffffff;'>";
@@ -753,9 +678,8 @@ class modul_controller
             }
         }
     }
-    
-    public function Modulfilter() 
-    {
+
+    public function Modulfilter() {
         $statement_semester = $this->modul->showFilterSemester("false");
         $statement_semester->bind_result($semester, $semesterAnzahl);
         $statement_semester->store_result();
@@ -768,7 +692,7 @@ class modul_controller
         $statement_verfuegbarkeit = $this->modul->showFilterVerfuegbarkeit("false");
         $statement_verfuegbarkeit->bind_result($modul_verfuegbarkeit, $verfuegbarkeitAnzahl);
         $statement_verfuegbarkeit->store_result();
-        
+
         echo"<div style='text-align: center'>";
         echo"<div class='suche'><table style='width: 100%; text-align: center'>";
         echo"<tr>";
@@ -777,100 +701,80 @@ class modul_controller
         echo"<th style='width: 20%; padding-right:2%;' class='tg-py0s'><b>Betreuer</b></th>";
         echo"<th style='width: 20%; padding-right:2%;' class='tg-py0s'><b>Verfügbarkeit</b></th>";
         echo"</tr>";
-        
-        if (isset($_GET['semester'])) 
-        {
+
+        if (isset($_GET['semester'])) {
             $sem_select = trim($_GET['semester']);
         } else {
             $sem_select = '';
         };
-        
-        if (isset($_GET['kategorie'])) 
-        {
+
+        if (isset($_GET['kategorie'])) {
             $kat_select = trim($_GET['kategorie']);
         } else {
             $kat_select = '';
         };
-        
-        if (isset($_GET['dozent'])) 
-        {
+
+        if (isset($_GET['dozent'])) {
             $dozent_select = trim($_GET['dozent']);
         } else {
             $dozent_select = '';
         };
-        
-        if (isset($_GET['modul_verfuegbarkeit'])) 
-        {
+
+        if (isset($_GET['modul_verfuegbarkeit'])) {
             $verfuegbarkeit_select = trim($_GET['modul_verfuegbarkeit']);
         } else {
             $verfuegbarkeit_select = '';
         };
-        
+
         echo"<form style='margin-bottom: 2%;'><tr><td>";
         echo"<select style='width:150px; margin-left: 20px;' class='form-control' name='semester' onchange='this.form.submit();'>";
         echo"<option class='form-control' disabled selected></option>";
-        while ($statement_semester->fetch()) 
-        {
-            if ($sem_select == $semester) 
-            {
+        while ($statement_semester->fetch()) {
+            if ($sem_select == $semester) {
                 $select = "selected='selected'; ";
-            } 
-            else 
-            {
+            } else {
                 $select = "";
             }
             echo"<option class='form-control' $select value='{$semester}'> {$semester} ({$semesterAnzahl})</option>";
         }
         echo"</select></td> ";
         echo "</form>";
-        
+
         echo"<form style='margin-bottom: 2%;'><td>";
         echo"<select style='width:150px; margin-left: 20px;'class='form-control' name='kategorie' onchange='this.form.submit();'>";
         echo"<option class='form-control' disabled selected></option>";
-        while ($statement_kategorie->fetch()) 
-        {
-            if ($kat_select == $kategorie) 
-            {
+        while ($statement_kategorie->fetch()) {
+            if ($kat_select == $kategorie) {
                 $select = "selected='selected'; ";
-            } 
-            else 
-            {
+            } else {
                 $select = "";
             }
             echo"<option $select class='form-control' value='{$kategorie}'> {$kategorie} ({$kategorieAnzahl})</option>";
         }
         echo"</select></td>";
         echo "</form>";
-        
+
         echo"<form style='margin-bottom: 2%;'><td>";
         echo"<select style='width:150px; margin-left: 20px;'class='form-control' name='dozent' onchange='this.form.submit();'>";
         echo"<option class='form-control' disabled selected></option>";
-        while ($statement_dozent->fetch()) 
-        {
-            if ($dozent_select == $dozent) 
-            {
+        while ($statement_dozent->fetch()) {
+            if ($dozent_select == $dozent) {
                 $select = "selected='selected'; ";
-            } 
-            else 
-            {
+            } else {
                 $select = "";
             }
             echo"<option $select class='form-control' value='{$dozent}'> {$dozent} ({$dozentAnzahl})</option>";
         }
         echo"</select></td>";
         echo "</form>";
-        
+
         echo"<form style='margin-bottom: 2%;'><td>";
         echo"<select style='width:150px; margin-left: 20px;'class='form-control' name='modul_verfuegbarkeit' onchange='this.form.submit();'>";
         echo"<option class='form-control' disabled selected></option>";
-        while ($statement_verfuegbarkeit->fetch()) 
-        {
-            if ($verfuegbarkeit_select == $modul_verfuegbarkeit) 
-            {
+        while ($statement_verfuegbarkeit->fetch()) {
+            if ($verfuegbarkeit_select == $modul_verfuegbarkeit) {
                 $select = "selected='selected'; ";
-            } 
-            else 
-            {
+            } else {
                 $select = "";
             }
             echo"<option $select class='form-control' value='{$modul_verfuegbarkeit}'> {$modul_verfuegbarkeit} ({$verfuegbarkeitAnzahl})</option>";
@@ -879,37 +783,32 @@ class modul_controller
         echo "</tr></table></form>";
         echo"</div></div>";
         echo"<br><br>";
-        
-        if (isset($_GET["semester"])) 
-        {
+
+        if (isset($_GET["semester"])) {
             $sem = $_GET["semester"];
             echo "<h5>Ergebnisse gefiltert nach {$_GET["semester"]}</h5>";
             $statement = $this->modul->getFilterModule("semester", $sem, "false");
             $this->ModulübersichtStudent($statement);
-            
-        } else if (isset($_GET["kategorie"])) 
-        {
+             
+        } else if (isset($_GET["kategorie"])) {
             $kate = $_GET["kategorie"];
             echo "<h5>Ergebnisse gefiltert nach {$_GET["kategorie"]}</h5>";
             $statement = $this->modul->getFilterModule("kategorie", $kate,"false");
             $this->ModulübersichtStudent($statement);
-            
-        } else if (isset($_GET["dozent"])) 
-        {
+          
+        } else if (isset($_GET["dozent"])) {
             $doze = $_GET["dozent"];
             echo "<h5>Ergebnisse gefiltert nach {$_GET["dozent"]}</h5>";
             $statement = $this->modul->getFilterDozent($doze,"false");
             $this->ModulübersichtStudent($statement);
             
-        } else if (isset($_GET["modul_verfuegbarkeit"])) 
-        {
+        } else if (isset($_GET["modul_verfuegbarkeit"])) {
             $verfueg = $_GET["modul_verfuegbarkeit"];
             echo "<h5>Ergebnisse gefiltert nach {$_GET["modul_verfuegbarkeit"]}</h5>";
             $statement = $this->modul->getFilterModule("modul_verfuegbarkeit", $verfueg,"false");
             $this->ModulübersichtStudent($statement);
-            
-        } else 
-        {
+         
+        } else {
             // FILTER ENDE
             // Abfrage der Module
             echo"<h5>Alle aktuellen Module im Überblick</h5>";
@@ -917,13 +816,11 @@ class modul_controller
             $this->ModulübersichtStudent($statement);
         }
     }
-    
-    public function altesThema($thema_id) 
-    {
+
+    public function altesThema($thema_id) {
         $statement = $this->thema->getThemeninfo($thema_id);
         $statement->bind_result($themenbezeichnung, $beschreibung);
-        while ($statement->fetch()) 
-        {
+        while ($statement->fetch()) {
             echo"<form method='post'>";
             echo"<div class='edit_div'>";
             echo"<table class='edit_div_table'>";
@@ -943,9 +840,8 @@ class modul_controller
             echo"</tr></table></div></form>";
         }
     }
-    
-    public function updateThema($themenbezeichnung, $themenbeschreibung, $thema_id) 
-    {
+
+    public function updateThema($themenbezeichnung, $themenbeschreibung, $thema_id) {
         $this->thema->updateThema($themenbezeichnung, $themenbeschreibung, $thema_id);
         echo"<script> $(window).load(function() { $('#update_thema').modal('show'); }); </script>";
         echo"<success><div class='modal fade' id='update_thema' tabindex='0' role='dialog'>";
@@ -968,33 +864,25 @@ class modul_controller
         echo"</div>";
         echo"</div></success>";
     }
-    
-    public function addThema($modul_id) 
-    {
+
+    public function addThema($modul_id) {
         $thema = $_POST['themenbezeichnung'];
         $beschreibung = $_POST['themenbeschreibung'];
-        if (!empty($thema) && !empty($beschreibung)) 
-        {
-            for ($i = 0; $i < count($thema); $i++) 
-            {
-                if (!empty($thema[$i])) 
-                {
+        if (!empty($thema) && !empty($beschreibung)) {
+            for ($i = 0; $i < count($thema); $i++) {
+                if (!empty($thema[$i])) {
                     $thema_array = $thema[$i];
-                    if (!empty($beschreibung[$i])) 
-                    {
+                    if (!empty($beschreibung[$i])) {
                         $beschreibung_array = $beschreibung[$i];
                         $this->thema->insertThema($modul_id, $thema_array, $beschreibung_array);
-                    } else 
-                    {
+                    } else {
                         $this->thema->insertThema($modul_id, $thema_array, '');
                     }
                 }
             } // Text Inhalt wenn ein/mehrere Themen hochgeladen wurden
-            if ($i > 1) 
-            {
+            if ($i > 1) {
                 $text_inhalt = "Die Themen wurden";
-            } else 
-            {
+            } else {
                 $text_inhalt = "Das Thema wurde";
             }
             echo"<script> $(window).load(function() { $('#add_thema').modal('show'); }); </script>";
@@ -1018,38 +906,34 @@ class modul_controller
             echo"</div></success>";
         }
     }
-    
-    public function deleteThema($thema_id) 
-    {
+
+    public function deleteThema($thema_id) {
         $statement_modulID = $this->thema->getModulId($thema_id);
         $statement_modulID->bind_result($modul_id);
         $statement_modulID->store_result();
-        
+
         // Hier wird die Anzahl der themen ID geholt, um zu prüfen, ob es bereits gelöscht worden ist.
         $statement_vorhanden = $this->thema->getThemaAnzahl($thema_id);
         $statement_vorhanden->bind_result($anzahl);
         $statement_vorhanden->store_result();
-        
-        while ($statement_vorhanden->fetch()) 
-        {
+
+        while ($statement_vorhanden->fetch()) {
+
+            // ANFANG
             //Es soll geprüft werden, ob das Thema noch vorhanden ist bzw. bereits gelöscht wurde.
             // das Thema nicht existiert (dh anzahl der id = 0), dann erscheint eine Fehlermeldung
-            if ($anzahl > 0) 
-            {
-                while ($statement_modulID->fetch()) 
-                {
+            if ($anzahl > 0) {
+                while ($statement_modulID->fetch()) {
                     $statement_frist = $this->modul->fristKontrolle($modul_id);
                     $statement_frist->bind_result($frist_start);
                     $statement_frist->store_result();
 
-                    while ($statement_frist->fetch()) 
-                    {
+                    while ($statement_frist->fetch()) {
                         date_default_timezone_set("Europe/Berlin");
                         $aktuell = new DateTime(date("Y-m-d"));
                         $start = new DateTime($frist_start);
 
-                        if ($start < $aktuell) 
-                        {
+                        if ($start < $aktuell) {
                             echo"<div style='top: 30%' class='modal fade' id='deleted_thema' tabindex='0' role='dialog' aria-labelledby='deleted}' >";
                             echo"<div class='modal-dialog'>";
                             echo"<div class='modal-content'>";
@@ -1068,8 +952,7 @@ class modul_controller
                             echo"</div>";
                             echo"</div>";
                             echo"</div>";
-                        } else 
-                        {
+                        } else {
                             $this->thema->deleteThema($thema_id);
                             //MODAL -> THEMA ERFOLGREICH LÖSCHEN CONFIRMATION 
                             echo"<script> $(window).load(function() { $('#thema_deleted').modal('show'); }); </script>";
@@ -1094,8 +977,7 @@ class modul_controller
                         }
                     }
                 }
-            } else 
-            {
+            } else {
                 //MODAL THEMA EXISTIERT NICHT  -> CONFIRMATION 
                 echo"<div style='top: 30%' class='modal fade' id='deleted_thema' tabindex='0' role='dialog' aria-labelledby='deleted}' >";
                 echo"<div class='modal-dialog'>";
@@ -1119,8 +1001,7 @@ class modul_controller
         }
     }
 
-    public function deleteModul($modul_id) 
-    {
+    public function deleteModul($modul_id) {
         $statement_anzahl = $this->modul->getModulAnzahl($modul_id);
         $statement_anzahl->bind_result($anzahl_modul);
         $statement_anzahl->store_result();
@@ -1129,18 +1010,13 @@ class modul_controller
         $statement_frist->bind_result($frist_start);
         $statement_frist->store_result();
 
-        while ($statement_anzahl->fetch()) 
-        {
-            if ($anzahl_modul > 0) 
-            {
-                while ($statement_frist->fetch()) 
-                {
+        while ($statement_anzahl->fetch()) {
+            if ($anzahl_modul > 0) {
+                while ($statement_frist->fetch()) {
                     date_default_timezone_set("Europe/Berlin");
                     $aktuell = new DateTime(date("Y-m-d"));
                     $start = new DateTime($frist_start);
-                    // Modal für "NICHT ERFOLGREICHES LÖSCHEN"
-                    if ($start < $aktuell) 
-                    {
+                    if ($start < $aktuell) {
                         echo"<div class='modal fade' id='deleted_modul' tabindex='0' role='dialog' aria-labelledby='deleted}' >";
                         echo"<div class='modal-dialog'>";
                         echo"<div class='modal-content'>";
@@ -1160,9 +1036,7 @@ class modul_controller
                         echo"</div>";
                         echo"</div>";
                         echo"</div>";
-                    } 
-                    else 
-                    {
+                    } else {
                         $this->modul->deleteModul($modul_id);
                         //MODAL -> Modul ERFOLGREICH LÖSCHEN CONFIRMATION 
                         echo"<script> $(window).load(function() { $('#deleted_modul').modal('show'); }); </script>";
@@ -1186,9 +1060,7 @@ class modul_controller
                         echo"</div></success>";
                     }
                 }
-            } 
-            else 
-            {
+            } else {
                 //MODAL MODUL EXISTIERT NICHT  -> CONFIRMATION 
                 echo"<div style='top: 30%' class='modal fade' id='deleted_thema' tabindex='0' role='dialog' aria-labelledby='deleted}' >";
                 echo"<div class='modal-dialog'>";
@@ -1212,8 +1084,7 @@ class modul_controller
         }
     }
 
-    public function updateModul($modul_id) 
-    {
+    public function updateModul($modul_id) {
         $kategorie = $_POST['Kategorie'];
         $modulbezeichnung = $_POST['Bezeichnung'];
         // $start = $_POST["Start"];
@@ -1250,6 +1121,7 @@ class modul_controller
         echo"</div>";
         echo"</div></success>";
     }
+
 }
 
 ?>
