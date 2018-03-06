@@ -20,7 +20,6 @@
                 <i style='color: #007bff;' class="fas fa-angle-right"></i> <a href="/verwaltung.php">Verwaltung</a><br>
                 <i style='color: #007bff;' class="fas fa-angle-right"></i> <a href="/modul_eintragen.php">Module eintragen</a><br>
                 <i style='color: #007bff;' class="fas fa-angle-right"></i> <a href="/mt_verwaltung.php">Modul- und Themenverwaltung</a><br>
-                <i style='color: #007bff;' class="fas fa-angle-right"></i> <a href="/report_wahl.php">Report erstellen</a><br>
             </p>
         </div>
         <?php } 
