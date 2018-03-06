@@ -9,15 +9,20 @@
         <th class="tg-py0s">
             <div class="accordion-group accordion-caret" data-toggle="collapse" href="#collapseOne" >
                 <div class="accordion-heading">
-                    <a style="color: #ffffff;" class="accordion-toggle" data-toggle="collapse" href="#collapseOne">
-                        Allgemeine Informationen
+     
+                <a style='color: #ffffff;' data-toggle='collapse' data-parent='#accordion' href='#collapseOne' aria-expanded='true'>
+                        <i class='fa' style='float:left;  margin-right: 10px;  padding: 10px;' aria-hidden='true'></i> 
+                        <div style='color:#ffffff;  padding: 10px;'>Allgemeine Informationen</div>
                     </a>
+                    
+                    
                 </div>
             </div>
         </th>
         <tr style="width: 100%;">
             <td class="tg-28r4" style="padding:0px;"> 
-                <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion" >      
+                
+                <div id='collapseOne' class='collapse show' role='tabpanel' aria-labelledby='headingOne' data-parent='#accordion'> 
                     <div class="card-body"><h4 style="margin-bottom: 10px">Vorgehensweise zur Bewerbung auf ein Seminar- oder Abschlussarbeitsthema</h4>                  
                         <p>
                         <ol>
@@ -37,18 +42,18 @@
     </table>
     <table class="tg" style="width: 100%;  margin: 1px;">
         <th class="tg-py0s">
-            <div class="accordion-group accordion-caret" data-toggle="collapse" href="#collapseTwo" >
-                <div class="accordion-heading">
-                    <a style="color: #ffffff;" class="accordion-toggle" data-toggle="collapse" href="#collapseTwo">
-                        Informationen zu den Vergabearten
+            <div class="accordion-group accordion-caret collapsed" data-toggle="collapse" href="#collapseTwo" >
+                <div class="accordion-heading">            
+                   <a style='color: #ffffff;' data-toggle='collapse' data-parent='#accordion' href='#collapseTwo' aria-expanded='false'>
+                        <i class='fa' style='float:left;  margin-right: 10px;  padding: 10px;' aria-hidden='false'></i> 
+                        <div style='color:#ffffff;  padding: 10px;'>Informationen zu den Vergabearten und Nachrückverfahren</div>
                     </a>
                 </div>
             </div>
         </th>
         <tr style="width: 100%;">
             <td class="tg-28r4" style="padding:0px;"> 
-
-                <div id="collapseTwo" class="collapse show" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion" >                     
+                 <div id='collapseTwo' class='collapse' role='tabpanel' aria-labelledby='headingOne' data-parent='#accordion'>                   
                     <div class="card-body"><h4 style="margin-bottom: 10px">Wie funktionieren die Verfahren?</h4>                       
                         <i>Wie funktioniert das <b>Bewerbungsverfahren</b>?</i>
                             Sie bewerben sich verbindlich für eine, von Ihnen, gewünschte Veranstaltung.
@@ -84,17 +89,18 @@
     </table>
     <table class="tg" style="width: 100%;  margin: 1px;">
         <th class="tg-py0s">
-            <div class="accordion-group accordion-caret" data-toggle="collapse" href="#collapseThree" >
-                <div class="accordion-heading">
-                    <a style="color: #ffffff;" class="accordion-toggle" data-toggle="collapse" href="#collapseThree">
-                        Informationen zur Bewerbung
-                    </a>
+            <div class="accordion-group accordion-caret collapsed" data-toggle="collapse" href="#collapseThree" >
+                <div class="accordion-heading">           
+                    <a style='color: #ffffff;' data-toggle='collapse' data-parent='#accordion' href='#collapseThree' aria-expanded='false'>
+                        <i class='fa' style='float:left;  margin-right: 10px;  padding: 10px;' aria-hidden='false'></i> 
+                        <div style='color:#ffffff;  padding: 10px;'>Informationen zur Bewerbung</div>
+                    </a>         
                 </div>
             </div>
         </th>
         <tr style="width: 100%;">
             <td class="tg-28r4" style="padding:0px;"> 
-                <div id="collapseThree" class="collapse show" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion1">
+                <div id='collapseThree' class='collapse' role='tabpanel' aria-labelledby='headingOne' data-parent='#accordion'>   
                     <div class="card-body"><h4 style="margin-bottom: 10px">Inhalte einer Bewerbung:</h4>                
                         <ul>                       
                             <li>Vorname</li> 
@@ -103,7 +109,7 @@
                             <li>Studentische E-Mail-Adresse</li>  
                             <li>Studiengang</li> 
                             <li>Fachsemester</li> 
-                            <li>Anzahl der Credits</li> 
+                            <li>Anzahl der Credits</li>   
                             <li>Versuch (Wurde bereits das Seminar nicht bestanden?)</li>  
                             <li>3 Wunschthemen (bei Belegwunschverfahren)</li> 
                         </ul> 
