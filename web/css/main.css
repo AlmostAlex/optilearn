@@ -103,7 +103,7 @@ color: #ffffff;
 
 /*--------------------------------------------------------------------------*/
 .header .slider {    
-    background-image:url('/test1/img/header.png');
+    background-image:url('/img/header.png');
     -webkit-background-size:cover;/* CSS3 */
     -moz-background-size:cover;/* CSS3 */
     -o-background-size:cover;/* CSS3 */
