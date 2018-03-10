@@ -1,6 +1,6 @@
 ﻿<?php
 require("model/benutzer_model.php");
-
+require("model/stadt_model.php");
 
 class index_controller
 {
@@ -12,6 +12,7 @@ class index_controller
     public function __construct() 
     {
         $this->benutzer = new benutzer_model();
+        $this->stadt = new stadt_model();
     }
 
     //Eintragung des Bewerbers in dem Modul (windhund)
@@ -38,6 +39,15 @@ class index_controller
         {
             echo "<div class='alertlogin'><div class='alert alert-danger' role='alert'><b>Achtung!</b><br>Bitte fÃ¼lle alle Eingabefelder aus!</div></div>";      
         }
+    }
+    
+    public function free_user_formular(){
+        $statement = $this->stadt->getAllBezeichnung();
+        $statement->bind_result($stadtbezeichnung,$stadt_id);
+        $statement->store_result(); 
+            while ($statement->fetch()) {
+                 echo "{$stadt_id} {$stadtbezeichnung}";   
+                }
     }
 
     public function registrieren() 

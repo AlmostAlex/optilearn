@@ -41,17 +41,12 @@ require("controller/index_controller.php");
 </div> 
 </center>
 
-<form action="">
-    <label>Stadt:</label>
-<select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-        <option selected>Wähle eine Stadt aus.</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
+<?php
+    $control = new benutzer_model();
+    $control->einloggen();
+    ?>
 
 
-Ort:
 
 </form>
 
