@@ -12,15 +12,6 @@
         <link href="css/default.css" rel="stylesheet" type="text/css" media="all" />
         <link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
 
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="java/vendor/bootstrap/css/bootstrap.min.css">
-
-        <link rel="stylesheet" type="text/css" href="java/vendor/animate/animate.css">
-	    <link rel="stylesheet" type="text/css" href="java/vendor/css-hamburgers/hamburgers.min.css">
-	    <link rel="stylesheet" type="text/css" href="java/vendor/select2/select2.min.css">
-        <link rel="stylesheet" type="text/css" href="css/util.css">
-	    <link rel="stylesheet" type="text/css" href="css/main.css">
-
         <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>      
     </head>
     <script>
