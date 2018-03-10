@@ -13,7 +13,6 @@ class index_controller {
         $this->stadt = new stadt_model();
     }
 
-    //Eintragung des Bewerbers in dem Modul (windhund)
     public function login() {
         $passwort = $_POST["passwort"];
         $benutzername = $_POST["benutzername"];

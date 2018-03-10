@@ -63,7 +63,7 @@ require("controller/index_controller.php");
         </div>
         <!--    Einfügen der Form zum einloggen    -->
         <div class='logform'>
-            <form class="contact1-form validate-form" method='post'>
+            <form method='post'>
                 <table style='width: 90%; margin: 5%;'>
                     <tr>
                         <td colspan='3'><h4 class='card-title'><i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i> Login-Bereich</h4></td>
