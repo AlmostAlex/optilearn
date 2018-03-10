@@ -41,8 +41,9 @@ class index_controller {
             <label>Stadt</label>
             <select name="users" onchange="showUser(this.value)">
         <?php
+            echo "<option value=''>Wähle eine Stadt aus!</option>";
         while ($statement->fetch()) {
-            echo "<option value='{$stadt_id} '>{$stadtbezeichnung}</option>";
+            echo "<option value=''>{$stadtbezeichnung}</option>";
         }
         ?>
             </select>
