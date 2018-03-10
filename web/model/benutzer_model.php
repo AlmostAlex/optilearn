@@ -30,14 +30,29 @@ class benutzer_model
 
     public function LoginKontrolle($benutzername, $passwort) 
     {
-        $statement = $this->dbh->prepare("SELECT passwort FROM benutzer WHERE benutzername = ?");
+        $statement = $this->dbh->prepare(
+            "SELECT passwort 
+            FROM benutzer 
+            WHERE benutzername = ?");
+
         $statement->bind_param('s', $benutzername);
         $statement->execute();
         $statement->bind_result($pw);
         while ($statement->fetch()) 
         {
+            echo $benutzername."+".$passwort."+".$pw;
             return ($pass_corr = password_verify($passwort, $pw));
         }
         
+    }
+
+    public function insertBenutzer($benutzername, $passwort) 
+    {
+        $statement = $this->dbh->prepare(
+            "INSERT INTO benutzer (benutzername, passwort)
+            VALUES(?,?)");
+
+        $statement->bind_param('ss', $benutzername, passwort);
+        $statement->execute();
     }
 }
