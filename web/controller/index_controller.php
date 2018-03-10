@@ -1,6 +1,7 @@
 ﻿<?php
-require("model/benutzer_model.php");
-require("model/stadt_model.php");
+include("model/benutzer_model.php");
+include("model/stadt_model.php");
+include("model/stadtbezirk_model.php");
 
 class index_controller {
 
@@ -11,6 +12,7 @@ class index_controller {
     public function __construct() {
         $this->benutzer = new benutzer_model();
         $this->stadt = new stadt_model();
+        $this->stadtbezirk = new stadtbezirk_model();
     }
 
     //Eintragung des Bewerbers in dem Modul (windhund)
@@ -32,68 +34,65 @@ class index_controller {
         }
     }
 
-    public function free_user_formular() {
+    public function free_user_formular_getBezirk($stadt_id) {
+        $statement = $this->stadtbezirk->getAllBezirk($stadt_id);
+        $statement->bind_result($Bezirk_id, $Bezirkbezeichnung);
+        $statement->store_result();
         ?>
-        <script>
-            <script>
-                function showCD(str) {
-                        if (str == "") {
-                document.getElementById("txtHint").innerHTML= "";         
-                return;
-            } 
-            if (window.XMLHttpRequest) {
-                        // code for IE7+, Firefox, Chrome, Opera, Safari
-                        xmlhttp = new XMLHttpRequest();
-                } else {  // code for IE6, IE5
-                        xmlhtt p  = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            xmlhttp.onreadystatechange=function() {
-                if (this.readyState == 4 && this.status == 200) {
-                document.ge t Elem entById("txtHint").innerHTML = this.responseText;
-                }
-                }
-                xmlhttp.open("GET","/ajax/getbezirk.php?q="+str,true);
-                    xmlhttp.send();
-                    }
-        </script>
+        <label>Stadtbezirk:</label>
+        <select id="bezirk" name="bezirk">
             <?php
-            $statement = $this->stadt->getAllBezeichnung();
-            $statement->bind_result($stadtbezeichnung, $stadt_id);
-            $statement->store_result();
-            ?>
-                    <form>
-                        <label>Stadt</label>
-                        <select name="users" onchange="showStadtbezirk(this.value)">
-                            <?php
-                            echo "<option value=''>Wähle eine Stadt aus!</option>";
-                            while ($statement->fetch()) {
-                                echo "<option id='{$stadt_id}'>{$stadtbezeichnung}</option>";
-                            }
-                            ?>
-                        </select>
-                    </form>
-                        <div id="txtHint"><b>CD info will be listed here...</b></div>
-                    <?php
-                }
-
-                public function registrieren() {
-                    $password = $_POST["passwort"];
-                    $benutzer = $_POST["benutzername"];
-                    if (!empty($password) && !empty($benutzer)) {
-                        $pass_corr = $this->model->LoginKontrolle($benutzer, $password);
-
-                        if ($pass_corr == TRUE) {
-
-                            $_SESSION['login'] = $this->model->getId($benutzer); // Loggt einen ein!           
-                            echo"<div class='alertlogin'><div class='alert alert-success' role='alert'><b>Anmeldung war erfolreich!</b><br>Die Weiterleitung erfolgt in wenigen Sekunden. <br> <img src='img/ajax-loader.gif'></div></div>";
-                            echo "<meta http-equiv='refresh' content='1.5; URL=/verwaltung.php'>"; // Weiterleitung zur Verwaltung 
-                        } else {
-                            echo "<div class='alertlogin'><div class='alert alert-danger role='alert'><b>Achtung!</b><br>Das Passwort und der Benutzername stimmen nicht Ã¼berein.</div></div>";
-                        }
-                    } else {
-                        echo "<div class='alertlogin'><div class='alert alert-danger' role='alert'><b>Achtung!</b><br>Bitte fÃ¼lle alle Eingabefelder aus!</div></div>";
-                    }
-                }
-
+            echo "<option id=''>Wähle einen Stadtbezirk aus!</option>";
+            while ($statement->fetch()) {
+                echo "<option value='{$Bezirk_id}'>{$Bezirkbezeichnung}</option>";
             }
+            ?>
+        </select>
+        <button type="submit" name="action">Als Free-User einloggen</button>  
+        <?php
+    }
+
+    public function free_user_formular() {
+        $statement = $this->stadt->getAllBezeichnung();
+        $statement->bind_result($stadtbezeichnung, $stadt_id);
+        $statement->store_result();
+        ?>
+        <form>
+            <label>Stadt</label>
+            <select id='stadt' name="stadt" onchange="showBezirk(this.value)">
+                <?php
+                echo "<option id=''>Wähle eine Stadt aus!</option>";
+                while ($statement->fetch()) {
+                    echo "<option value='{$stadt_id}'>{$stadtbezeichnung}</option>";
+                }
+                ?>
+            </select>
+            <div id="waehle_stadt">Wähle eine Stadt aus.</div>
+
+            <div id="txtHint"></div> 
             
+        </form>
+
+        <?php
+    }
+
+    public function registrieren() {
+        $password = $_POST["passwort"];
+        $benutzer = $_POST["benutzername"];
+        if (!empty($password) && !empty($benutzer)) {
+            $pass_corr = $this->model->LoginKontrolle($benutzer, $password);
+
+            if ($pass_corr == TRUE) {
+
+                $_SESSION['login'] = $this->model->getId($benutzer); // Loggt einen ein!           
+                echo"<div class='alertlogin'><div class='alert alert-success' role='alert'><b>Anmeldung war erfolreich!</b><br>Die Weiterleitung erfolgt in wenigen Sekunden. <br> <img src='img/ajax-loader.gif'></div></div>";
+                echo "<meta http-equiv='refresh' content='1.5; URL=/verwaltung.php'>"; // Weiterleitung zur Verwaltung 
+            } else {
+                echo "<div class='alertlogin'><div class='alert alert-danger role='alert'><b>Achtung!</b><br>Das Passwort und der Benutzername stimmen nicht Ã¼berein.</div></div>";
+            }
+        } else {
+            echo "<div class='alertlogin'><div class='alert alert-danger' role='alert'><b>Achtung!</b><br>Bitte fÃ¼lle alle Eingabefelder aus!</div></div>";
+        }
+    }
+
+}
