@@ -106,9 +106,6 @@ function showBezirk(str) {
                 </table>
             </form>
         </div>
-    </div>
-</div>
-
 <?php
 if (isset($_POST["einloggen"])) 
 {
