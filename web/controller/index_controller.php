@@ -2,18 +2,22 @@
 require("model/benutzer_model.php");
 require("model/stadt_model.php");
 
-class index_controller {
+class index_controller 
+{
 
     //Erstellen einer Variable vom Typ benutzer_model, 
     //damit alle Funktionen Zugriff auf diese über $this->modul haben
     public $benutzer;
 
-    public function __construct() {
+    public function __construct() 
+    {
         $this->benutzer = new benutzer_model();
         $this->stadt = new stadt_model();
     }
 
-    public function login() {
+    public function login() 
+    {
+        echo $_POST["benutzername"];
         $passwort = $_POST["passwort"];
         $benutzername = $_POST["benutzername"];
         if (!empty($password) && !empty($benutzer)) {
