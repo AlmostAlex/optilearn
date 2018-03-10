@@ -46,14 +46,14 @@ require("controller/index_controller.php");
     $control->free_user_formular();
     ?>
 
-
-<div class="contact1-pic js-tilt" data-tilt>
-	<img src="images/Login.png" alt="IMG">
-</div>
-
-<!--    Einfügen der Form zum einloggen    -->
-<div class='logform'>
-    <form method='post'>
+<div class="contact1">
+		<div class="container-contact1">
+            <div class="contact1-pic js-tilt" data-tilt>
+                <img src="images/Login.png" alt="IMG">
+            </div>
+            <!--    Einfügen der Form zum einloggen    -->
+            <div class='logform'>
+            <form method='post'>
         <table style='width: 90%; margin: 5%;'>
             <tr>
                 <td colspan='3'><h4 class='card-title'><i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i> Login-Bereich</h4></td>
@@ -78,7 +78,7 @@ require("controller/index_controller.php");
             </tr>
         </table>
     </form>
-</div>
+</div></div></div>
 
 
 
