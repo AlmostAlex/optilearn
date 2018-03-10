@@ -20,7 +20,7 @@
                 <div id="header" class="container">
                     <div id="logo">
                         <div class="item active">
-                                <img src="images/Logo_optilearn.png" alt="Logo" style="width:15%;">
+                                <img src="images/Logo_optilearn.png" alt="Logo" style="width:23%;">
                         </div>
                         <p>Optimales Lernen durch optimale Bedingungen!</p>
                     </div>
