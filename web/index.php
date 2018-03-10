@@ -85,11 +85,11 @@ include('header.php');
 </answer>
 		
 <br><br>
-<div class="title">
+<center><div class="title">
     <h2>Optilearn - Login-System</h2>
     <span class="byline">Als registrierter User oder Free-User!</span>
 </div> 
-
+</center>
   <div id="process-box-1">
     <div class="process-box-number">
     <p>01.</p>

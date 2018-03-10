@@ -119,14 +119,14 @@ hr {
 
 #header-wrapper
 {
-    background: #970A42 url(images/overlay.png);
+    background: #01559e url(/images/overlay.png);
     background-size: cover;
 }
 
 #header {
     position: relative;
     overflow: hidden;
-
+    height: 200px;
 }
 
 #social
