@@ -112,8 +112,6 @@ if (isset($_POST["einloggen"])) {
 }
 
 
-
-<?php
 include('navi.php');
 include('footer.php');
 ?>
