@@ -16,22 +16,21 @@ class index_controller {
     }
 
     //Eintragung des Bewerbers in dem Modul (windhund)
-    public function login() {
+    public function login() 
+    {
         $passwort = $_POST["passwort"];
         $benutzername = $_POST["benutzername"];
-        if (!empty($password) && !empty($benutzer)) {
-            $pass_corr = $this->benutzer->LoginKontrolle($benutzername, $passwort);
-
-            if ($pass_corr == TRUE) {
+        $pass_corr = $this->benutzer->LoginKontrolle($benutzername, $passwort);
+        if ($pass_corr == TRUE) 
+        {
                 $_SESSION['login'] = $this->benutzer->getBenutzerId($benutzername); // Loggt einen ein!
                 echo"<div class='alertlogin'><div class='alert alert-success' role='alert'><b>Anmeldung war erfolreich!</b><br>Die Weiterleitung erfolgt in wenigen Sekunden. <br> <img src='img/ajax-loader.gif'></div></div>";
-                echo "<meta http-equiv='refresh' content='1.5; URL=/verwaltung.php'>"; // Weiterleitung zur Verwaltung 
-            } else {
-                echo "<div class='alertlogin'><div class='alert alert-danger role='alert'><b>Achtung!</b><br>Das Passwort und der Benutzername stimmen nicht überein.</div></div>";
-            }
-        } else {
-            echo "<div class='alertlogin'><div class='alert alert-danger' role='alert'><b>Achtung!</b><br>Bitte fÃ¼lle alle Eingabefelder aus!</div></div>";
-        }
+                echo "<meta http-equiv='refresh' content='1.5; URL=/blank.php'>"; // Weiterleitung zur Verwaltung 
+        } 
+        else 
+        {
+            echo "<div class='alertlogin'><div class='alert alert-danger role='alert'><b>Achtung!</b><br>Das Passwort und der Benutzername stimmen nicht überein.</div></div>";
+        } 
     }
 
     public function free_user_formular_getBezirk($stadt_id) {
