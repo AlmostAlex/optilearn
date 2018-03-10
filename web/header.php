@@ -19,7 +19,9 @@
             <div id="header-wrapper">
                 <div id="header" class="container">
                     <div id="logo">
-                        <h1><a href="#">OptiLearn</a></h1>
+                        <div class="item active">
+                                <img src="images/Logo_optilearn.png" alt="Logo" style="width:100%;">
+                        </div>
                         <p>Optimales Lernen durch optimale Bedingungen!</p>
                     </div>
                     <div id="social">
