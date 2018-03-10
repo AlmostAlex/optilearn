@@ -38,7 +38,8 @@ class index_controller {
             <script>
                 function showCD(str) {
                         if (str == "") {
-                document.getElementById("txtHint").innerHTML= "";         return;
+                document.getElementById("txtHint").innerHTML= "";         
+                return;
             } 
             if (window.XMLHttpRequest) {
                         // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -66,7 +67,7 @@ class index_controller {
                             <?php
                             echo "<option value=''>Wähle eine Stadt aus!</option>";
                             while ($statement->fetch()) {
-                                echo "<option value=''>{$stadtbezeichnung}</option>";
+                                echo "<option id='{$stadt_id}'>{$stadtbezeichnung}</option>";
                             }
                             ?>
                         </select>
