@@ -16,21 +16,17 @@ class index_controller {
     }
 
     //Eintragung des Bewerbers in dem Modul (windhund)
-    public function login() 
-    {
+    public function login() {
         $passwort = $_POST["passwort"];
         $benutzername = $_POST["benutzername"];
         $pass_corr = $this->benutzer->LoginKontrolle($benutzername, $passwort);
-        if ($pass_corr == TRUE) 
-        {
-                $_SESSION['login'] = $this->benutzer->getBenutzerId($benutzername); // Loggt einen ein!
-                echo"<div class='alertlogin'><div class='alert alert-success' role='alert'><b>Anmeldung war erfolreich!</b><br>Die Weiterleitung erfolgt in wenigen Sekunden. <br> <img src='img/ajax-loader.gif'></div></div>";
-                echo "<meta http-equiv='refresh' content='1.5; URL=/blank.php'>"; // Weiterleitung zur Verwaltung 
-        } 
-        else 
-        {
+        if ($pass_corr == TRUE) {
+            $_SESSION['login'] = $this->benutzer->getBenutzerId($benutzername); // Loggt einen ein!
+            echo"<div class='alertlogin'><div class='alert alert-success' role='alert'><b>Anmeldung war erfolreich!</b><br>Die Weiterleitung erfolgt in wenigen Sekunden. <br> <img src='img/ajax-loader.gif'></div></div>";
+            echo "<meta http-equiv='refresh' content='1.5; URL=/blank.php'>"; // Weiterleitung zur Verwaltung 
+        } else {
             echo "<div class='alertlogin'><div class='alert alert-danger role='alert'><b>Achtung!</b><br>Das Passwort und der Benutzername stimmen nicht überein.</div></div>";
-        } 
+        }
     }
 
     public function free_user_formular_getBezirk($stadt_id) {
@@ -38,16 +34,23 @@ class index_controller {
         $statement->bind_result($Bezirk_id, $Bezirkbezeichnung);
         $statement->store_result();
         ?>
-        <label>Stadtbezirk:</label>
-        <select id="bezirk" name="bezirk">
-            <?php
-            echo "<option id=''>Wähle einen Stadtbezirk aus!</option>";
-            while ($statement->fetch()) {
-                echo "<option value='{$Bezirk_id}'>{$Bezirkbezeichnung}</option>";
-            }
-            ?>
-        </select>
-        <button type="submit" name="action">Als Free-User einloggen</button>  
+        <div class="form-group">
+            <table>
+                <tr>
+                    <td><label class="col-sm-2 col-form-label">Stadtbezirk</label></td> 
+                    <td><select class="form-control" id="bezirk" name="bezirk">
+                            <?php
+                            echo "<option id=''>Wähle einen Stadtbezirk aus!</option>";
+                            while ($statement->fetch()) {
+                                echo "<option value='{$Bezirk_id}'>{$Bezirkbezeichnung}</option>";
+                            }
+                            ?>
+                        </select> 
+                    </td>
+                <tr>
+            </table>
+        </div>
+        <button class="button" type="submit">Als Free-User einloggen</button>  
         <?php
     }
 
@@ -57,21 +60,25 @@ class index_controller {
         $statement->store_result();
         ?>
         <form>
-            <label>Stadt</label>
-            <select id='stadt' name="stadt" onchange="showBezirk(this.value)">
-                <?php
-                echo "<option id=''>Wähle eine Stadt aus!</option>";
-                while ($statement->fetch()) {
-                    echo "<option value='{$stadt_id}'>{$stadtbezeichnung}</option>";
-                }
-                ?>
-            </select>
-            <div id="waehle_stadt">Wähle eine Stadt aus.</div>
-
-            <div id="txtHint"></div> 
-            
+            <div class="form-group">
+                <table>
+                    <tr>
+                        <td><label class="col-sm-2 col-form-label">Stadt</label></td> 
+                        <td><select class="form-control" id='stadt' name="stadt" onchange="showBezirk(this.value)">
+                                <?php
+                                echo "<option id=''>Wähle eine Stadt aus!</option>";
+                                while ($statement->fetch()) {
+                                    echo "<option value='{$stadt_id}'>{$stadtbezeichnung}</option>";
+                                }
+                                ?>
+                            </select>
+                        </td>
+                    <tr>
+                </table>
+                <div id="waehle_stadt">Wähle eine Stadt aus.</div>
+                <div id="txtHint"></div>  
+            </div>
         </form>
-
         <?php
     }
 

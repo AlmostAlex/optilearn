@@ -73,13 +73,14 @@ require("db.php");
     </div> 
 </center>
 
+<box>
 <?php
 $control = new index_controller();
 $control->free_user_formular();
 ?>
+</box>
 
 <br><br><br>
-
 <!--    EinfÃ¼gen der Form zum einloggen    -->
 <div class='logform'>
             <form method='post'>
