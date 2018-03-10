@@ -38,6 +38,7 @@ class index_controller {
         $statement->store_result();
         ?>
         <form>
+            <label>Stadt</label>
             <select name="users" onchange="showUser(this.value)">
         <?php
         while ($statement->fetch()) {
