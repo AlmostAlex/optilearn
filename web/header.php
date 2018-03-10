@@ -17,11 +17,7 @@
         <!-- AJAX -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
-    <script>
-        $(document).ready(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-        });
-    </script> 
+
     <body>
         <div id="wrapper">
             <img style='position: absolute; margin-top: -100px; margin-left: -70px; width:30%;' src="images/Logo_optilearn.png" alt="Logo">

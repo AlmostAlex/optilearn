@@ -36,31 +36,35 @@ require("db.php");
 </answer>
 
 <script>
-function showBezirk(str) {
-    if (str == "") {
-        document.getElementById("txtHint").innerHTML = "";
-        $("#waehle_stadt").slideDown();
-        $("#bezirk").slideUp();
-        return;
-    } else { 
-        if (window.XMLHttpRequest) {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    function showBezirk(str) {
+        if (str == "") {
+            document.getElementById("txtHint").innerHTML = "";
+            $("#waehle_stadt").slideDown();
+            $("#bezirk").slideUp();
+            return;
         } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("txtHint").innerHTML = this.responseText;
-                $("#waehle_stadt").slideUp();
-                $("#bezirk").slideDown();
+            if (window.XMLHttpRequest) {
+                // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            } else {
+                // code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
             }
-        };
-        xmlhttp.open("GET","getBezirk.php?q="+str,true);
-        xmlhttp.send();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("txtHint").innerHTML = this.responseText;
+                    $("#waehle_stadt").slideUp();
+                    $("#bezirk").slideDown();
+                }
+            };
+            xmlhttp.open("GET", "getBezirk.php?q=" + str, true);
+            xmlhttp.send();
+        }
     }
-}
 </script>
 <br><br>
 <center><div class="title">
@@ -70,9 +74,9 @@ function showBezirk(str) {
 </center>
 
 <?php
- $control = new index_controller();
- $control->free_user_formular();
-  ?>
+$control = new index_controller();
+$control->free_user_formular();
+?>
 
 <br><br><br>
 
