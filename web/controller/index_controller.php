@@ -18,6 +18,7 @@ class index_controller
     public function login() 
     {
         echo $_POST["benutzername"];
+        echo $_POST["passwort"];
         $passwort = $_POST["passwort"];
         $benutzername = $_POST["benutzername"];
         if (!empty($password) && !empty($benutzer)) {
