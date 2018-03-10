@@ -40,6 +40,7 @@ class benutzer_model
         $statement->bind_result($pw);
         while ($statement->fetch()) 
         {
+            echo $benutzername."+".$passwort."+".$pw;
             return ($pass_corr = password_verify($passwort, $pw));
         }
         

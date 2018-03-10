@@ -17,11 +17,8 @@ class index_controller
 
     public function login() 
     {
-        echo $_POST["benutzername"];
-        echo $_POST["passwort"];
         $passwort = $_POST["passwort"];
         $benutzername = $_POST["benutzername"];
-        echo "....".$passwort."...".$benutzername;
         
         $pass_corr = $this->benutzer->LoginKontrolle($benutzername, $passwort);
         if ($pass_corr == TRUE)
