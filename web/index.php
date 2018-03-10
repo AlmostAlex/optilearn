@@ -20,11 +20,7 @@ require("db.php");
                 ibh augue praesent a lacus at urna congue rutntum nibh augue praesenongue rutnt a lacus at urnantum nibh augue praesent a lacus at urna congue rutntum nibh augue praesent a lacus at urna congue rutntum n
                 ibh augue praesent a lacus at urna congue rutntum nibh augue praesen urnantum nibh augue praesent
             </div>
-<<<<<<< HEAD
         </div>
-=======
-        </div>  
->>>>>>> 335021570952c918244450474bb99033d6b1dd17
 
         <li>
             <div class="panel-heading"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse2">Results</a></div>
@@ -80,7 +76,6 @@ function showBezirk(str) {
 
 <br><br><br>
 
-<<<<<<< HEAD
 <! ----------------------------------------------------------->
 <link rel="stylesheet" type="text/css" href="java/vendor/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="java/vendor/animate/animate.css">
@@ -147,9 +142,6 @@ if (isset($_POST["einloggen"]))
     $control->login();
 }
 
-=======
-<?php
->>>>>>> 335021570952c918244450474bb99033d6b1dd17
 include('navi.php');
 include('footer.php');
 ?>
