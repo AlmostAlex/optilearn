@@ -20,9 +20,16 @@
             <div id="header-wrapper">
                 <div id="header" class="container">
                     <div id="logo">
+
                         <div class="item active"></div>
                         <h1 style='position: absolute; width: 400px; margin-left: 100px; '><a href="#">ptiLearn</a></h1>
                         <p style="position: absolute; width: 400px; margin-left: 115px; top: 50px;">Optimales Lernen durch optimale Bedingungen!</p>
+
+                        <div class="item active">
+                                <img src="images/Logo_optilearn.png" alt="Logo" style="width:23%;">
+                        </div>
+                        <p>Optimales Lernen durch optimale Bedingungen!</p>
+
                     </div>
                     <div id="social">
                         <ul class="contact">
