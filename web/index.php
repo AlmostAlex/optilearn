@@ -105,7 +105,11 @@ require("controller/index_controller.php");
 		})
 </script>
 <! ----------------------------------------------------------->
-
+<?php
+if (isset($_POST["einloggen"])) {
+    $control = new index_controller();
+    $control->login();
+}
 
 
 
