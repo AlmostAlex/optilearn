@@ -42,8 +42,8 @@ require("controller/index_controller.php");
 </center>
 
 <?php
-    $control = new benutzer_model();
-    $control->einloggen();
+    $control = new index_controller();
+    $control->free_user_formular();
     ?>
 
 
