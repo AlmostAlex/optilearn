@@ -21,22 +21,30 @@ class index_controller
         echo $_POST["passwort"];
         $passwort = $_POST["passwort"];
         $benutzername = $_POST["benutzername"];
-        if (!empty($password) && !empty($benutzer)) {
+        echo "....".$passwort."...".$benutzername;
+        if (!empty($password) && !empty($benutzer)) 
+        {
             $pass_corr = $this->benutzer->LoginKontrolle($benutzername, $passwort);
 
-            if ($pass_corr == TRUE) {
+            if ($pass_corr == TRUE) 
+            {
                 $_SESSION['login'] = $this->benutzer->getBenutzerId($benutzername); // Loggt einen ein!
                 echo"<div class='alertlogin'><div class='alert alert-success' role='alert'><b>Anmeldung war erfolreich!</b><br>Die Weiterleitung erfolgt in wenigen Sekunden. <br> <img src='img/ajax-loader.gif'></div></div>";
                 echo "<meta http-equiv='refresh' content='1.5; URL=/blank.php'>"; // Weiterleitung zur Verwaltung 
-            } else {
+            } 
+            else 
+            {
                 echo "<div class='alertlogin'><div class='alert alert-danger role='alert'><b>Achtung!</b><br>Das Passwort und der Benutzername stimmen nicht überein.</div></div>";
             }
-        } else {
-            echo "<div class='alertlogin'><div class='alert alert-danger' role='alert'><b>Achtung!</b><br>Bitte fÃ¼lle alle Eingabefelder aus!</div></div>";
+        } 
+        else 
+        {
+            echo "<div class='alertlogin'><div class='alert alert-danger' role='alert'><b>Achtung!</b><br>Bitte fülle alle Eingabefelder aus!</div></div>";
         }
     }
 
-    public function free_user_formular() {
+    public function free_user_formular() 
+    {
         ?>
         <script>
             <script>
