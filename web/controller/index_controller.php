@@ -71,6 +71,7 @@ class index_controller {
                             ?>
                         </select>
                     </form>
+                        <div id="txtHint"><b>CD info will be listed here...</b></div>
                     <?php
                 }
 
