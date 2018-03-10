@@ -23,7 +23,7 @@ class index_controller {
             if ($pass_corr == TRUE) {
                 $_SESSION['login'] = $this->benutzer->getBenutzerId($benutzername); // Loggt einen ein!
                 echo"<div class='alertlogin'><div class='alert alert-success' role='alert'><b>Anmeldung war erfolreich!</b><br>Die Weiterleitung erfolgt in wenigen Sekunden. <br> <img src='img/ajax-loader.gif'></div></div>";
-                echo "<meta http-equiv='refresh' content='1.5; URL=/verwaltung.php'>"; // Weiterleitung zur Verwaltung 
+                echo "<meta http-equiv='refresh' content='1.5; URL=/bank.php'>"; // Weiterleitung zur Verwaltung 
             } else {
                 echo "<div class='alertlogin'><div class='alert alert-danger role='alert'><b>Achtung!</b><br>Das Passwort und der Benutzername stimmen nicht überein.</div></div>";
             }
