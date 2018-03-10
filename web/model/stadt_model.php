@@ -27,6 +27,17 @@ class stadt_model
         }
     }
 
+    public function getAllBezeichnung() 
+    {
+        $statement = $this->dbh->prepare(
+            "SELECT stadtbezeichnung 
+            FROM stadt);
+
+        $statement->bind_param('i', $stadt_id);
+        $statement->execute();
+        return $statement;
+    }
+
     public function getStadtId($stadtbezeichnung) 
     {
         $statement = $this->dbh->prepare(
