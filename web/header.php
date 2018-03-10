@@ -11,6 +11,9 @@
         <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900|Varela+Round" rel="stylesheet" />
         <link href="css/default.css" rel="stylesheet" type="text/css" media="all" />
         <link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
+        <link rel="stylesheet" type="text/css" href="java/vendor/animate/animate.css">
+	    <link rel="stylesheet" type="text/css" href="java/vendor/css-hamburgers/hamburgers.min.css">
+	    <link rel="stylesheet" type="text/css" href="java/vendor/select2/select2.min.css">
 
         <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>      
     </head>
