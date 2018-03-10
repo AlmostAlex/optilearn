@@ -1,8 +1,9 @@
 <?php
 include('header.php');
-require("db.php");
 require("controller/index_controller.php");
+require("db.php");
 ?>
+
 
 <div class="title">
     <span class="byline">Fragen und Antworten</span>
@@ -19,8 +20,12 @@ require("controller/index_controller.php");
                 ibh augue praesent a lacus at urna congue rutntum nibh augue praesenongue rutnt a lacus at urnantum nibh augue praesent a lacus at urna congue rutntum nibh augue praesent a lacus at urna congue rutntum n
                 ibh augue praesent a lacus at urna congue rutntum nibh augue praesen urnantum nibh augue praesent
             </div>
+<<<<<<< HEAD
+        </div>
+=======
         </div>  
-        
+>>>>>>> 335021570952c918244450474bb99033d6b1dd17
+
         <li>
             <div class="panel-heading"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse2">Results</a></div>
         </li>      
@@ -33,20 +38,49 @@ require("controller/index_controller.php");
         </div> 
     </ul>
 </answer>
-		
+
+<script>
+function showBezirk(str) {
+    if (str == "") {
+        document.getElementById("txtHint").innerHTML = "";
+        $("#waehle_stadt").slideDown();
+        $("#bezirk").slideUp();
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("txtHint").innerHTML = this.responseText;
+                $("#waehle_stadt").slideUp();
+                $("#bezirk").slideDown();
+            }
+        };
+        xmlhttp.open("GET","getBezirk.php?q="+str,true);
+        xmlhttp.send();
+    }
+}
+</script>
 <br><br>
 <center><div class="title">
-    <h2>Optilearn - Login-System</h2>
-    <span class="byline">Als registrierter User oder Free-User!</span>
-</div> 
+        <h2>Optilearn - Login-System</h2>
+        <span class="byline">Als registrierter User oder Free-User!</span>
+    </div> 
 </center>
 
 <?php
-    $control = new index_controller();
-    $control->free_user_formular();
-?>
+ $control = new index_controller();
+ $control->free_user_formular();
+  ?>
 
+<br><br><br>
 
+<<<<<<< HEAD
 <! ----------------------------------------------------------->
 <link rel="stylesheet" type="text/css" href="java/vendor/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="java/vendor/animate/animate.css">
@@ -105,13 +139,17 @@ require("controller/index_controller.php");
 		})
 </script>
 <! ----------------------------------------------------------->
+
 <?php
-if (isset($_POST["einloggen"])) {
+if (isset($_POST["einloggen"])) 
+{
     $control = new index_controller();
     $control->login();
 }
 
-
+=======
+<?php
+>>>>>>> 335021570952c918244450474bb99033d6b1dd17
 include('navi.php');
 include('footer.php');
 ?>
