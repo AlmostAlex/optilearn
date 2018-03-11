@@ -81,11 +81,18 @@ class index_controller {
         <?php
     }
 
-    public function registrieren() {
-        $password = $_POST["passwort"];
+    public function registrieren() 
+    {
+        if($_POST["passwort"] == $_POST[""])
+        if($_POST["Nutzertyp"] == "Student")
+        {
+            
+        }
+        $passwort = $_POST["passwort"];
         $benutzer = $_POST["benutzername"];
-        if (!empty($password) && !empty($benutzer)) {
-            $pass_corr = $this->model->LoginKontrolle($benutzer, $password);
+        if (!empty($password) && !empty($benutzer)) 
+        {
+            $pass_corr = $this->model->LoginKontrolle($benutzer, $passwort);
 
             if ($pass_corr == TRUE) {
 
