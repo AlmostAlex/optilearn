@@ -59,7 +59,6 @@ class index_controller {
         $statement->bind_result($stadtbezeichnung, $stadt_id);
         $statement->store_result();
         ?>
-        <form>
             <div class="form-group">
                 <table>
                     <tr>
@@ -78,7 +77,7 @@ class index_controller {
                 <div id="waehle_stadt">Wähle eine Stadt aus.</div>
                 <div id="txtHint"></div>  
             </div>
-        </form>
+
         <?php
     }
 

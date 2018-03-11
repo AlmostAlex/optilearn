@@ -338,7 +338,7 @@ hr {
     margin:10px 20px 10px 100px;
     color:#c0c0c0;
     font-size: 14px;
-    margin-left: 15%;
+    margin-left: 12%;
 }
 
 #footer .details h3{
@@ -541,7 +541,7 @@ ul.contact li a:before
 	background: #fff;
 	box-shadow: 0 0 3px #000;
 	margin: 30px auto;
-	max-width: 500px;
+	max-width: 700px;
 	overflow: hidden;
 	position: relative;
 	padding: 0;
@@ -555,6 +555,8 @@ ul.contact li a:before
 }
 .forms form { padding: 30px; }
 #signup { display: none; }
+#free { display: none; }
+
 .forms .tab-group {
 	list-style: none;
 	padding: 0;
@@ -573,7 +575,7 @@ ul.contact li a:before
 	color: #888;
 	font-size: 20px;
 	float: left;
-	width: 50%;
+	width: 33.3%;
 	text-align: center;
 	border-top: 3px solid transparent;
 	-moz-transition: all 0.4s ease-in-out;
