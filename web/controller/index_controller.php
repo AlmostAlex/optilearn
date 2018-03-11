@@ -3,28 +3,35 @@ include("model/benutzer_model.php");
 include("model/stadt_model.php");
 include("model/stadtbezirk_model.php");
 
-class index_controller {
+class index_controller 
+{
 
     //Erstellen einer Variable vom Typ benutzer_model, 
     //damit alle Funktionen Zugriff auf diese über $this->modul haben
     public $benutzer;
 
-    public function __construct() {
+    public function __construct() 
+    {
         $this->benutzer = new benutzer_model();
         $this->stadt = new stadt_model();
         $this->stadtbezirk = new stadtbezirk_model();
+        $this->student = new student_model();
     }
 
     //Eintragung des Bewerbers in dem Modul (windhund)
-    public function login() {
+    public function login() 
+    {
         $passwort = $_POST["passwort"];
         $benutzername = $_POST["benutzername"];
         $pass_corr = $this->benutzer->LoginKontrolle($benutzername, $passwort);
-        if ($pass_corr == TRUE) {
+        if ($pass_corr == TRUE) 
+        {
             $_SESSION['login'] = $this->benutzer->getBenutzerId($benutzername); // Loggt einen ein!
             echo"<div class='alertlogin'><div class='alert alert-success' role='alert'><b>Anmeldung war erfolreich!</b><br>Die Weiterleitung erfolgt in wenigen Sekunden. <br> <img src='img/ajax-loader.gif'></div></div>";
             echo "<meta http-equiv='refresh' content='1.5; URL=/blank.php'>"; // Weiterleitung zur Verwaltung 
-        } else {
+        } 
+        else 
+        {
             echo "<div class='alertlogin'><div class='alert alert-danger role='alert'><b>Achtung!</b><br>Das Passwort und der Benutzername stimmen nicht überein.</div></div>";
         }
     }
@@ -81,13 +88,31 @@ class index_controller {
         <?php
     }
 
-    public function registrieren() 
+    public function registrieren()
     {
-        if($_POST["passwort"] == $_POST[""])
-        if($_POST["Nutzertyp"] == "Student")
+        if($_POST["passwort1"] == $_POST["passwort2"])
         {
-            
+            if($_POST["Nutzertyp"] == "Student")
+            {
+                $benutzername = $_POST["benutzername"];
+                $passwort = password_hash($_POST["passwort1"], PASSWORD_DEFAULT);
+                $vorname = $_POST["vorname"];
+                $nachname = $_POST["nachname"];
+                $email = $_POST["email"];
+                $nutzertyp = 1;
+                $stadt = $_POST["stadt"];
+                $uni = $_POST["uni"];
+
+                $benutzerduplikat = $this->benutzer->duplikatBenutzer($benutzername);
+                $emailduplikat = $this->benutzer->duplikatEmail($email);
+                if(($benutzerduplikat != $benutzername) && ($emailduplikat != $email))
+                {
+                    $last_id = $this->benutzer->insertBenutzer($benutzername, $passwort, $email, $nutzertyp, $vorname, $nachname);
+                    $this->student->
+                }
+            }
         }
+        
         $passwort = $_POST["passwort"];
         $benutzer = $_POST["benutzername"];
         if (!empty($password) && !empty($benutzer)) 
