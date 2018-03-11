@@ -130,7 +130,7 @@ require("db.php");
                 </td>
                 <td><input type='Nachname' class='form-control' placeholder="Nachname" required name='Nachname' required></td>
             </tr>
-          <script>
+            <script>
                 $(document).ready(function () {
                     $('#purpose').on('change', function () {
                         if (this.value == '1')
@@ -147,21 +147,33 @@ require("db.php");
                 <td>
                     <label>Nutzen als:</label>
                 </td>
-           <td><select id='purpose'>
-                <option value="0">Personal use</option>
-                <option value="1">Business use</option>
-               </select></td>
+                <td><select id='purpose'>
+                        <option>Als was nutzt du die Anwendung?</option>
+                        <option value="0">Personal use</option>
+                        <option value="1">Business use</option>
+                    </select></td>
             <tr>
         </table>
-        <table>
-            <tr>
-               <td>
-                   <div style='display:none;' id='business'>
-                       Business Name teste undso
-                   </div>
-               </td>
-            </tr>           
-        </table> 
+
+        <div style='display:none;' id='business'>
+            <table>
+                <tr>
+                    <td> 
+                        Business Name teste undso               
+                    </td>
+                </tr>           
+            </table> 
+        </div>
+       <div style='display:none;' id='student'>
+            <table>
+                <tr>
+                    <td> 
+                        Student Name teste undso               
+                    </td>
+                </tr>           
+            </table> 
+        </div>
+        
     </form>
     <form id="free">
         <h1>Sign Up on w3iscool</h1>
