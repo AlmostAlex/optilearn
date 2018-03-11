@@ -4,10 +4,11 @@ require("controller/index_controller.php");
 require("db.php");
 ?>
 
-
 <div class="title">
     <span class="byline">Fragen und Antworten</span>
 </div> 
+
+
 
 <answer>
     <ul>
@@ -44,12 +45,12 @@ require("db.php");
 
 <div class="forms">
     <ul class="tab-group">
-        <li class="tab active"><a href="#login">Log In</a></li>
-        <li class="tab"><a href="#signup">Sign Up</a></li>
-        <li class="tab"><a href="#free">free</a></li>
+        <li class="tab active"><a href="#login">LogIn</a></li>
+        <li class="tab"><a href="#signup">Registrierung</a></li>
+        <li class="tab"><a href="#free">Login als Free-User</a></li>
     </ul>
     <form method='post' id="login">
-        <h1>Login on w3iscool</h1>
+        <h1>Login auf Optilearn</h1>
         <div class="input-field">
             <div style='float:left;' class="contact1-pic js-tilt" data-tilt>
                 <img src="images/login_logo.png" alt="IMG">
@@ -84,13 +85,83 @@ require("db.php");
             ?>
         </div>
     </form>
-    <form action="#" id="signup">
-        <h1>Sign Up on w3iscool</h1>
+    <form method='post' id="signup">
+        <h1>Registrierung</h1>
         <div class="input-field">
             <div style='float:left;' class="contact1-pic js-tilt" data-tilt>
                 <img src="images/register_logo.png" alt="IMG">
             </div>
         </div>
+        <table>
+            <tr>      
+                <td>                
+                    <label>Benutzername:</label>
+                </td>
+                <td><input type='Benutzername' class='form-control' placeholder="Benutzername" required name='Benutzername' required></td>
+            </tr>
+
+            <tr>      
+                <td>                
+                    <label>Passwort:</label>
+                </td>
+                <td><input type='Passwort' class='form-control' placeholder="Passwort" required name='Passwort' required></td>
+            </tr>
+            <tr>      
+                <td>                
+                    <label>Passwort wiederholen:</label>
+                </td>
+                <td><input type='Passwort2' class='form-control' placeholder="Passwort2" required name='Passwort2' required></td>
+            </tr>                
+            <tr>      
+                <td>                
+                    <label>E-Mail:</label>
+                </td>
+                <td><input type='Email' class='form-control' placeholder="Email" required name='Email' required></td>
+            </tr>                
+            <tr>      
+                <td>                
+                    <label>Name:</label>
+                </td>
+                <td><input type='Name' class='form-control' placeholder="Name" required name='Name' required></td>
+            </tr> 
+            <tr>      
+                <td>                
+                    <label>Nachname:</label>
+                </td>
+                <td><input type='Nachname' class='form-control' placeholder="Nachname" required name='Nachname' required></td>
+            </tr>
+          <script>
+                $(document).ready(function () {
+                    $('#purpose').on('change', function () {
+                        if (this.value == '1')
+                        {
+                            $("#business").slideDown("slow")
+                        } else
+                        {
+                            $("#business").hide();
+                        }
+                    });
+                });
+            </script>
+            <tr>   
+                <td>
+                    <label>Nutzen als:</label>
+                </td>
+           <td><select id='purpose'>
+                <option value="0">Personal use</option>
+                <option value="1">Business use</option>
+               </select></td>
+            <tr>
+        </table>
+        <table>
+            <tr>
+               <td>
+                   <div style='display:none;' id='business'>
+                       Business Name teste undso
+                   </div>
+               </td>
+            </tr>           
+        </table> 
     </form>
     <form id="free">
         <h1>Sign Up on w3iscool</h1>

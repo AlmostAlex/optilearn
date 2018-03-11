@@ -13,7 +13,7 @@
                             1500s, when an unknown printer took a galley of type and scrambled it to make atype nd scrambled it to make atype specimen </p>
                 </div>      
                 <div>
-                    <h3>Wissenschaftliches</h3>
+                    <h3>Über uns</h3>
                     <p>nd scrambled it to make atype nd scrambled it to make atype nd scrambled it to make atype </p>
                 </div>  
                 <div>
