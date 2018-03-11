@@ -36,6 +36,28 @@ class index_controller
         }
     }
 
+    public function formularStadtDropdown() 
+    {
+        $statement = $this->stadt->getAllBezeichnung();
+        $statement->bind_result($stadtbezeichnung, $stadt_id);
+        $statement->store_result();
+        ?>
+            <tr>
+                <td><label class="col-sm-2 col-form-label">Stadt</label></td> 
+                <td><select class="form-control" id="bezirk" name="bezirk">
+                        <?php
+                        echo "<option id=''>Wähle einen Stadtbezirk aus!</option>";
+                        while ($statement->fetch()) 
+                        {
+                            echo "<option value='{$stadt_id}'>{$stadtbezeichnung}</option>";
+                        }
+                        ?>
+                    </select> 
+                </td>
+            <tr>
+        <?php
+    }
+
     public function free_user_formular_getBezirk($stadt_id) {
         $statement = $this->stadtbezirk->getAllBezirk($stadt_id);
         $statement->bind_result($Bezirk_id, $Bezirkbezeichnung);
@@ -108,27 +130,55 @@ class index_controller
                 if(($benutzerduplikat != $benutzername) && ($emailduplikat != $email))
                 {
                     $last_id = $this->benutzer->insertBenutzer($benutzername, $passwort, $email, $nutzertyp, $vorname, $nachname);
-                    $this->student->
+                    $this->student->insertStudent($last_id, $uni, $stadt);
+                }
+                else
+                {
+                    if($benutzerduplikat != $benutzername)
+                    {
+                        echo "BENUTZERNAME IST BEREITS VERGEBEN!";
+                    }
+                    else
+                    {
+                        echo "EMAIL IST BEREITS VERGEBEN!";
+                    }
+                }
+            }
+            elseif($_POST["Nutzertyp"] == "Business")
+            {
+                $benutzername = $_POST["benutzername"];
+                $passwort = password_hash($_POST["passwort1"], PASSWORD_DEFAULT);
+                $vorname = $_POST["vorname"];
+                $nachname = $_POST["nachname"];
+                $email = $_POST["email"];
+                $nutzertyp = 2;
+                $kreditkarte = $_POST["kreditkarte"];
+                $kreditkartenNr = $_POST["kreditkartenNr"];
+                $stadt = $_POST["stadt"];
+
+                $benutzerduplikat = $this->benutzer->duplikatBenutzer($benutzername);
+                $emailduplikat = $this->benutzer->duplikatEmail($email);
+                if(($benutzerduplikat != $benutzername) && ($emailduplikat != $email))
+                {
+                    $last_id = $this->benutzer->insertBenutzer($benutzername, $passwort, $email, $nutzertyp, $vorname, $nachname);
+                    $this->student->insertBusiness($last_id, $kreditkarte, $kreditkartenNr, $stadt);
+                }
+                else
+                {
+                    if($benutzerduplikat != $benutzername)
+                    {
+                        echo "BENUTZERNAME IST BEREITS VERGEBEN!";
+                    }
+                    else
+                    {
+                        echo "EMAIL IST BEREITS VERGEBEN!";
+                    }
                 }
             }
         }
-        
-        $passwort = $_POST["passwort"];
-        $benutzer = $_POST["benutzername"];
-        if (!empty($password) && !empty($benutzer)) 
+        else
         {
-            $pass_corr = $this->model->LoginKontrolle($benutzer, $passwort);
-
-            if ($pass_corr == TRUE) {
-
-                $_SESSION['login'] = $this->model->getId($benutzer); // Loggt einen ein!           
-                echo"<div class='alertlogin'><div class='alert alert-success' role='alert'><b>Anmeldung war erfolreich!</b><br>Die Weiterleitung erfolgt in wenigen Sekunden. <br> <img src='img/ajax-loader.gif'></div></div>";
-                echo "<meta http-equiv='refresh' content='1.5; URL=/verwaltung.php'>"; // Weiterleitung zur Verwaltung 
-            } else {
-                echo "<div class='alertlogin'><div class='alert alert-danger role='alert'><b>Achtung!</b><br>Das Passwort und der Benutzername stimmen nicht Ã¼berein.</div></div>";
-            }
-        } else {
-            echo "<div class='alertlogin'><div class='alert alert-danger' role='alert'><b>Achtung!</b><br>Bitte fÃ¼lle alle Eingabefelder aus!</div></div>";
+            echo "DIE PASSWÖRTER SIND NICHT IDENTISCH";
         }
     }
 
