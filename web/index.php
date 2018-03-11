@@ -51,7 +51,9 @@ require("db.php");
     <form method='post' id="login">
         <h1>Login on w3iscool</h1>
         <div class="input-field">
-
+            <div style='float:left;' class="contact1-pic js-tilt" data-tilt>
+                <img src="images/login_logo.png" alt="IMG">
+            </div>
             <table>
                 <tr>      
                     <td>                
@@ -85,12 +87,17 @@ require("db.php");
     <form action="#" id="signup">
         <h1>Sign Up on w3iscool</h1>
         <div class="input-field">
-            feld 2
+            <div style='float:left;' class="contact1-pic js-tilt" data-tilt>
+                <img src="images/register_logo.png" alt="IMG">
+            </div>
         </div>
     </form>
     <form id="free">
         <h1>Sign Up on w3iscool</h1>
         <div class="input-field">
+            <div style='float:left;' class="contact1-pic js-tilt" data-tilt>
+                <img src="images/free_logo.png" alt="IMG">
+            </div>
             <?php
             $control = new index_controller();
             $control->free_user_formular();
