@@ -73,7 +73,45 @@ require("db.php");
     </div> 
 </center>
 
+
+
+<div class="forms">
+	<ul class="tab-group">
+		<li class="tab active"><a href="#login">Log In</a></li>
+		<li class="tab"><a href="#signup">Sign Up</a></li>
+	</ul>
+	<form action="#" id="login">
+	      <h1>Login on w3iscool</h1>
+	      <div class="input-field">
+                    feld 1
+	      </div>
+	  </form>
+	  <form action="#" id="signup">
+	      <h1>Sign Up on w3iscool</h1>
+	      <div class="input-field">
+                  feld 2
+	      </div>
+	  </form>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	  $('.tab a').on('click', function (e) {
+	  e.preventDefault();
+	  
+	  $(this).parent().addClass('active');
+	  $(this).parent().siblings().removeClass('active');
+	  
+	  var href = $(this).attr('href');
+	  $('.forms > form').hide();
+	  $(href).fadeIn(500);
+	});
+});
+</script>
+
+
 <box>
+
 <?php
 $control = new index_controller();
 $control->free_user_formular();
@@ -82,12 +120,8 @@ $control->free_user_formular();
 
 <br><br><br>
 <!--    EinfÃ¼gen der Form zum einloggen    -->
-<div class='logform'>
             <form method='post'>
-                <table style='width: 90%; margin: 5%;'>
-                    <tr>
-                        <td colspan='3'><h4 class='card-title'><i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i> Login-Bereich</h4></td>
-                    </tr>
+                <table>
                     <tr>      
                         <td>                
                             <div class="input-group">
@@ -110,7 +144,6 @@ $control->free_user_formular();
                     </tr>
                 </table>
             </form>
-        </div>
 <?php
 if (isset($_POST["einloggen"])) 
 {
