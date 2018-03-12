@@ -1,3 +1,7 @@
+<?php 
+    session_start(); 
+ ?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
     <head>
@@ -15,8 +19,10 @@
         <link href="fonts.css" rel="stylesheet" type="text/css" media="all"></link>
         <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css"></link>
         <link rel="stylesheet" type="text/css" href="css/main.css"></link>
+        <link rel="stylesheet" href="css/progresscircle.css"> <!-- progress bar -->
         <!-- AJAX -->                
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="js/progresscircle.js"></script> <!-- progress bar -->
         <script src="js/jquery.js"></script>
         <script src="js/main.js"></script>
     </head>
@@ -66,7 +72,8 @@
                 <div id="page" class="container">
 
                     <div>              
-                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                        <div id="myCarousel" class="carousel slide">
+                          <!-- <div id="myCarousel" class="carousel slide" data-ride="carousel">-->
                             <!-- Indicators -->
                             <ol class="carousel-indicators">
                                 <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -90,11 +97,11 @@
                             </div>
 
                             <!-- Left and right controls -->
-                            <a class="left carousel-control" style='height: 96%;' href="#myCarousel" data-slide="prev">
+                            <a class="left carousel-control" style='height: 100%;' href="#myCarousel" data-slide="prev">
                                 <span class="glyphicon glyphicon-chevron-left"></span>
                                 <span class="sr-only">Previous</span>
                             </a>
-                            <a class="right carousel-control" style='height: 96%;' href="#myCarousel" data-slide="next">
+                            <a class="right carousel-control" style='height: 100%;' href="#myCarousel" data-slide="next">
                                 <span class="glyphicon glyphicon-chevron-right"></span>
                                 <span class="sr-only">Next</span>
                             </a>

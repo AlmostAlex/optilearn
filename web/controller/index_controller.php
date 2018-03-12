@@ -32,6 +32,7 @@ class index_controller
         if ($pass_corr == TRUE) 
         {
             $_SESSION['login'] = $this->benutzer->getBenutzerId($benutzername); // Loggt einen ein!
+            $_SESSION['typ'] = $this->benutzer->getBenutzerTyp($_SESSION["login"]);
             echo"<div class='alertlogin'><div class='alert alert-success' role='alert'><b>Anmeldung war erfolreich!</b><br>Die Weiterleitung erfolgt in wenigen Sekunden. <br> <img src='img/ajax-loader.gif'></div></div>";
             echo"<meta http-equiv='refresh' content='1.5; URL=/blank.php'>"; // Weiterleitung zur Verwaltung 
         } 
@@ -43,10 +44,12 @@ class index_controller
 
     public function freeLogin()
     {
-        $_SESSION["stadt"] = $_POST["stadt"];
-        $_SESSION["bezirk"] = $_POST["bezirk"];
+        $_SESSION['stadt'] = $_POST["stadt"];
+        $_SESSION['bezirk'] = $_POST["bezirk"];
+        $_SESSION['typ'] = 3;
+        echo "DAS IST DIE SESSION: ".$_SESSION['login'];
         echo"<div class='alertlogin'><div class='alert alert-success' role='alert'><b>Räume werden aufgerufen!</b><br>Die Weiterleitung erfolgt in wenigen Sekunden. <br> <img src='img/ajax-loader.gif'></div></div>";
-        echo"<meta http-equiv='refresh' content='1.0; URL=/blank.php'>"; // Weiterleitung zur Verwaltung 
+        echo"<meta http-equiv='refresh' content='5.0; URL=/blank.php'>"; // Weiterleitung zur Verwaltung 
 
     }
 
@@ -178,10 +181,7 @@ class index_controller
         </div>
         <button class="button" name = 'freelogin' type="submit">Als Free-User einloggen</button>  
         <?php
-        if(isset($_POST["freelogin"]))
-        {
-            $this->freeLogin();
-        }
+
     }
 
     public function free_user_formular_getUni($stadt_id) 

@@ -5,19 +5,33 @@ require("db.php");
 ?>
 
 
-<center><div class="title">
-        <h2>Optilearn - Übersicht der Räume</h2>
+<center>
+    <div class="title">
+        <h2>Optilearn - Ãœbersicht der RÃ¤ume</h2>
     </div>
 </center>
-
-            <?php
-                $control = new lernumgebung_controller();
-                $control->lernumgebung();
-            
-            ?>
-
-
 <?php
+
+if($_SESSION["typ"] == 1)
+{
+    $control = new lernumgebung_controller();
+    $control->lernumgebungStudent();
+}
+else if($_SESSION["typ"] == 2)
+{
+    $control = new lernumgebung_controller();
+    $control->lernumgebungBusiness();
+}
+
+elseif($_SESSION["typ"] == 3)
+{
+    $control = new lernumgebung_controller();
+    $control->lernumgebungFree();
+}
+
+
+
+
 include("navi.php");
 include("footer.php");
 ?>

@@ -28,6 +28,22 @@ class student_model
         }
     }
 
+    public function getUniID($benutzer_id) 
+    {
+        $statement = $this->dbh->prepare(
+            "SELECT uni_id
+            FROM student 
+            WHERE benutzer_id = ?");
+
+        $statement->bind_param('i', $benutzer_id);
+        $statement->execute();
+        $statement->bind_result($uni_id);
+        while ($statement->fetch()) 
+        {
+            return $uni_id;
+        }
+    }
+
     public function insertStudent($last_id, $uni, $stadt) 
     {
         $statement = $this->dbh->prepare("INSERT INTO student (benutzer_id, uni_id, stadt_id) 

@@ -1,5 +1,4 @@
-﻿<?php
-include 'header.php';
+﻿<?php include 'header.php';
 require "controller/index_controller.php";
 require "db.php";
 ?>
@@ -7,8 +6,6 @@ require "db.php";
 <div class="title">
     <span class="byline">Fragen und Antworten</span>
 </div>
-
-
 
 <answer>
     <ul>
@@ -22,7 +19,6 @@ require "db.php";
                 ibh augue praesent a lacus at urna congue rutntum nibh augue praesen urnantum nibh augue praesent
             </div>
         </div>
-
         <li>
             <div class="panel-heading"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse2">Results</a></div>
         </li>
@@ -222,7 +218,7 @@ if (isset($_POST["register"]))
 
 <script src="vendor/select2/select2.min.js"></script>
 <script src="vendor/tilt/tilt.jquery.min.js"></script>
-    <form id="free">
+    <form method = "post" id="free">
         <h1>Sign Up on w3iscool</h1>
         <div class="input-field">
             <div style='float:left;' class="contact1-pic js-tilt" data-tilt>
@@ -233,6 +229,14 @@ $control->free_user_formular();
 ?>
         </div>
     </form>
+    <?php
+    if(isset($_POST["freelogin"]))
+        {
+            echo "IST DER BUTTON GEDRÜCKT?!?!";
+            $control->freeLogin();
+        }
+    ?>
+
 </div>
 
 <?php

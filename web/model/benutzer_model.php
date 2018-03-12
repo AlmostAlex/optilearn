@@ -30,6 +30,22 @@ class benutzer_model
         }
     }
 
+    public function getBenutzerTyp($benutzer_id) 
+    {
+        $statement = $this->dbh->prepare(
+            "SELECT typ 
+            FROM benutzer 
+            WHERE benutzer_id = ?");
+
+        $statement->bind_param('i', $benutzer_id);
+        $statement->execute();
+        $statement->bind_result($typ);
+        while ($statement->fetch()) 
+        {
+            return $typ;
+        }
+    }
+
     public function LoginKontrolle($benutzername, $passwort) 
     {
         $statement = $this->dbh->prepare("SELECT passwort FROM benutzer WHERE benutzername = ?");
