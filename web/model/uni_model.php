@@ -76,20 +76,17 @@ class uni_model
         }
     }
 
-    public function getAllUni($uni_id) 
+    public function getAllUni($stadt_id) 
     {
         $statement = $this->dbh->prepare(
-            "SELECT uni_id, unibezeichunung 
+            "SELECT uni_id, unibezeichnung 
             FROM uni 
-            WHERE uni.stadt_id = stadt.stadt_id AND uni.uni_id = ?");
-
-        $statement->bind_Param('i', $uni_id);
+            WHERE stadt_id = ?
+            ORDER BY unibezeichnung");
+            
+        $statement->bind_Param('i', $stadt_id);
         $statement->execute();        
-        $statement->bind_result($stadtbezeichnung);
-        while ($statement->fetch())
-        {
-            return $stadtbezeichnung;
-        }
+        return $statement;
     }
 
 

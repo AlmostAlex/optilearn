@@ -22,15 +22,25 @@
     </head>
     <body>
         <div id="wrapper">
-            <img style='position: absolute; margin-top: -100px; margin-left: -70px; width:30%;' src="images/Logo_optilearn.png" alt="Logo">
+
+        <div class="input-field">
+            <div style='position: absolute; margin-left:280px; top:-60px;' class="contact1-pic js-tilt" data-tilt>
+                <img  src="images/Logo_optilearn.png" alt="IMG">
+            </div>
+<!--
+<img style='position: absolute; margin-top: -100px; margin-left: -70px; width:30%;' src="images/Logo_optilearn.png" alt="IMG">
+-->
+		<script src="vendor/select2/select2.min.js"></script>
+		<script src="vendor/tilt/tilt.jquery.min.js"></script>
+
                 <div id="header-wrapper">
                     <div id="header" class="container">
                         <div id="logo">
-
                             <div class="item active"></div>
                             <h1 style='position: absolute; width: 400px; margin-left: 110px; '><a href="#">ptiLearn</a></h1>
                             <p style="position: absolute; width: 400px; margin-left: 125px; top: 50px;">Optimales Lernen durch optimale Bedingungen!</p>
                         </div>
+
                         <div id="social">
                             <ul class="contact">
                                 <li><a href="#" data-toggle="tooltip" title="Twitter" class="icon icon-twitter"><span>Twitter</span></a></li>
@@ -44,7 +54,7 @@
                     </div>
                     <div id="menu" class="container">
                         <ul>
-                            <li class="current_page_item"><a href="#" accesskey="1" title="">Homepage</a></li>
+                            <li><a href="#" accesskey="1" title="">Homepage</a></li>
                             <li><a href="#" accesskey="1" title="">Services</a></li>
                             <li><a href="#" accesskey="2" title="">Our Clients</a></li>
                             <li><a href="#" accesskey="3" title="">About Us</a></li>

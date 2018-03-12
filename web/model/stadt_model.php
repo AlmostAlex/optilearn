@@ -31,7 +31,8 @@ class stadt_model
     {
         $statement = $this->dbh->prepare(
             "SELECT stadtbezeichnung, stadt_id 
-            FROM stadt");
+            FROM stadt
+            ORDER BY stadtbezeichnung");
         $statement->execute();
         return $statement;
     }

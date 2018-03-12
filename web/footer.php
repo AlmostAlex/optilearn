@@ -1,5 +1,4 @@
-<script src="vendor/select2/select2.min.js"></script>
-<script src="vendor/tilt/tilt.jquery.min.js"></script>
+﻿
         <div id="footer">
             <div class="details">
                 <div> 

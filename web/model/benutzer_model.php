@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 class benutzer_model 
 {
@@ -49,11 +51,15 @@ class benutzer_model
         {
             $statement->bind_param('s', $benutzername);
             $statement->execute();
-            return $statement;
+            $statement->bind_result($benutzernameDB);
+            while($statement->fetch())
+            {
+                return $benutzernameDB;
+            }
         }
         else
         {
-            return "leere DB";
+            return "keinDuplikat";
         }
     }
 
@@ -66,20 +72,26 @@ class benutzer_model
         {
             $statement->bind_param('s', $email);
             $statement->execute();
-            return $statement;
+            $statement->bind_result($emailDB);
+            while($statement->fetch())
+            {
+                return $emailDB;
+            }
         }
         else
         {
-            return "leere DB";
+            return "keinDUplikat";
         }
     }
 
     public function insertBenutzer($benutzername, $passwort, $email, $nutzertyp, $vorname, $nachname) 
     {
-        $statement = $this->dbh->prepare("INSERT INTO benutzer (benutzername, passwort, typ, vorname, nachname, email) 
-        VALUES (?,?,?,?,?,?)");
-        $statement->bind_param('ssisss', $benutzername, $passwort, $nutzertyp, $vorname, $nachname, $email);
-        $statement->execute();
+        $statement = $this->dbh->prepare(
+            "INSERT INTO benutzer (benutzername, passwort, email, typ, vorname, nachname) 
+            VALUES (?,?,?,?,?,?)");
+
+            $statement->bind_param('sssiss', $benutzername, $passwort, $email, $nutzertyp, $vorname, $nachname);
+            $statement->execute();
         $last_id = $this->dbh->insert_id;
         return $last_id;
     }

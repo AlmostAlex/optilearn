@@ -30,9 +30,10 @@ class business_model
 
     public function insertBusiness($last_id, $kreditkarte, $kreditkartenNr, $stadt) 
     {
+        echo $last_id."---".$kreditkarte."----".$kreditkartenNr."-----".$stadt;
         $statement = $this->dbh->prepare("INSERT INTO business (benutzer_id, kreditkarte, kreditkartenNr, stadt_id) 
-        VALUES (?,?,?)");
-        $statement->bind_param('iii', $last_id, $kreditkarte, $kreditkartenNr, $stadt);
+        VALUES (?,?,?,?)");
+        $statement->bind_param('isii', $last_id, $kreditkarte, $kreditkartenNr, $stadt);
         $statement->execute();
     }
 }

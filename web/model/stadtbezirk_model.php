@@ -17,7 +17,8 @@ class stadtbezirk_model
         $statement = $this->dbh->prepare(
             "SELECT stadtbezirk_id, bezirkbezeichnung 
             FROM stadtbezirk 
-            WHERE stadt_id = ?");
+            WHERE stadt_id = ?
+            ORDER BY bezirkbezeichnung");
 
         $statement->bind_param('i', $stadt_id);
         $statement->execute();
